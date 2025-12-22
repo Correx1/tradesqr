@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.font-inter {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.font-serif {
+    font-family: 'PT Serif', serif;
+}
+
+/* Blue Accents */
+.text-gradient-blue {
+    background: linear-gradient(to right, #2563eb, #06b6d4);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Typing Effect */
+.typing-text::after {
+    content: '|';
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Floating Image Animation */
+.floating-image {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+
+/* Pricing Cards */
+.pricing-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #2563eb;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.pricing-card:hover::before {
+    opacity: 1;
+}
+
+.pricing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+    border-color: #93c5fd;
+}
+
+.pricing-card.popular {
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #2563eb, #06b6d4) border-box;
+    position: relative;
+}
+
+.pricing-card.popular::before {
+    opacity: 1;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(6, 182, 212, 0.05));
+}
+
+/* FAQ Accordion */
+.faq-item {
+    background: white;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.faq-item:hover {
+    border-color: #d1d5db;
+}
+
+.faq-question {
+    cursor: pointer;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 1.5rem;
+}
+
+.faq-answer.active {
+    max-height: 300px;
+    padding: 0 1.5rem 1.25rem 1.5rem;
+}
+
+.faq-icon {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.faq-icon.active {
+    transform: rotate(180deg);
+}
+
+/* Navbar Scroll Effect */
+nav.scrolled {
+    background-color: #111827; /* Gray-900 */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+nav.scrolled #nav-logo {
+    color: white; /* Gray-900 */
+}
+
+nav.scrolled .nav-link {
+    color: #e5e7eb; /* Gray-200 */
+}
+
+nav.scrolled .nav-link:hover {
+    color: #3b82f6; /* Blue-500 */
+}
+
+nav.scrolled #mobile-toggle {
+    color: #e5e7eb; /* Gray-200 */
+}
