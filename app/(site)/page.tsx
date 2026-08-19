@@ -41,11 +41,11 @@ export default async function HomePage() {
 
     realEstateListings = showcaseRE?.length
       ? showcaseRE
-      : DUMMY_LISTINGS.filter((l) => l.category === 'houses' || l.category === 'land')
+      : DUMMY_LISTINGS.filter((l) => l.category === 'realEstate' || l.category === 'land' || l.category === 'houses')
   } catch {
     featuredListings = DUMMY_LISTINGS.slice(0, 6)
     realEstateListings = DUMMY_LISTINGS.filter(
-      (l) => l.category === 'houses' || l.category === 'land'
+      (l) => l.category === 'realEstate' || l.category === 'land' || l.category === 'houses'
     )
   }
 

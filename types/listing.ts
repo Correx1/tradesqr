@@ -8,7 +8,7 @@ export interface ContactLink {
 }
 
 export type ListingStatus = 'available' | 'pending' | 'sold'
-export type ListingCategory = 'cars' | 'realEstate' | 'land' | 'generic'
+export type ListingCategory = 'cars' | 'realEstate' | 'land' | 'generic' | 'houses' | 'services' | string
 
 export interface ListingLocation {
   state?: string
@@ -16,8 +16,8 @@ export interface ListingLocation {
 }
 
 export interface SanityImage {
-  _type: 'image'
-  asset: {
+  _type?: 'image'
+  asset?: {
     _ref: string
     _type: 'reference'
   }
@@ -27,6 +27,7 @@ export interface SanityImage {
     height: number
     width: number
   }
+  url?: string
 }
 
 /** A single amenity / feature badge — icon is a slug mapped to a Lucide icon on the frontend */

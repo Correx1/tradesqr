@@ -122,18 +122,21 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
       }
 
       case 'services': {
+        const sType = listing.serviceType ? String(listing.serviceType) : null
+        const tTime = listing.turnaroundTime ? String(listing.turnaroundTime) : null
+        if (!sType && !tTime) return null
         return (
           <div className="flex flex-col gap-1.5 text-xs text-white/90">
-            {listing.serviceType && (
+            {sType && (
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="h-4 w-4 shrink-0 text-blue-300" />
-                <span className="truncate">{String(listing.serviceType)}</span>
+                <span className="truncate">{sType}</span>
               </div>
             )}
-            {listing.turnaroundTime && (
+            {tTime && (
               <div className="flex items-center gap-1.5">
                 <Clock className="h-4 w-4 shrink-0 text-blue-300" />
-                <span>Turnaround: {String(listing.turnaroundTime)}</span>
+                <span>Turnaround: {tTime}</span>
               </div>
             )}
           </div>

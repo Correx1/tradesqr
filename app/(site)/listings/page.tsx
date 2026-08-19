@@ -1,5 +1,5 @@
 import { ListingsCatalog } from '@/components/listings'
-import { ListingsHero } from '@/components/sections'
+import { ListingsHero } from '@/components/sections/ListingsHero'
 import { client } from '@/lib/sanity/client'
 import { listingsQuery } from '@/lib/sanity/queries'
 import { DUMMY_LISTINGS } from '@/lib/mockData'

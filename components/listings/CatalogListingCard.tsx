@@ -18,6 +18,8 @@ import { type Listing } from '@/types/listing'
 import { CATEGORIES } from '@/lib/categoryFields'
 import { formatPrice, cn } from '@/lib/utils'
 
+import { urlForImage } from '@/lib/sanity/image'
+
 export interface CatalogListingCardProps {
   listing: Listing
   priority?: boolean
@@ -34,6 +36,7 @@ export function CatalogListingCard({ listing, priority = false, className }: Cat
   })
 
   const imageUrl =
+    (listing.coverImage && urlForImage(listing.coverImage)?.width(800).height(600).url()) ||
     listing.coverImage?.url ||
     (typeof listing.coverImage === 'string' ? listing.coverImage : undefined) ||
     'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80'

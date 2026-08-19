@@ -29,14 +29,14 @@ export interface RealEstateShowcaseProps {
 
 export function RealEstateShowcase({
   heading = 'Prime Real Estate & Land Deals',
-  subheading = 'Explore verified luxury residential homes, contemporary duplexes, and prime commercial plots across Nigeria.',
+  subheading = 'Explore verified luxury residential homes, contemporary duplexes, and prime commercial plots.',
   listings = [],
-  viewAllHref = '/listings?category=houses',
+  viewAllHref = '/listings',
   className,
 }: RealEstateShowcaseProps) {
-  // Filter for real estate (houses + land)
+  // Filter for real estate (realEstate, houses + land)
   const realEstateListings = listings.filter(
-    (l) => l.category === 'houses' || l.category === 'land'
+    (l) => l.category === 'realEstate' || l.category === 'houses' || l.category === 'land'
   )
 
   const spotlightItem = realEstateListings[0]

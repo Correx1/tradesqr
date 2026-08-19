@@ -73,18 +73,24 @@ export function ListingsCatalog({ initialListings = [] }: ListingsCatalogProps) 
       if (appliedFilters.category === 'cars' && item.category !== 'cars') {
         return false
       }
-      if (appliedFilters.category === 'building' && item.category !== 'houses' && item.category !== 'land') {
+      if (
+        appliedFilters.category === 'building' &&
+        item.category !== 'realEstate' &&
+        item.category !== 'houses' &&
+        item.category !== 'land'
+      ) {
         return false
       }
 
       // 2. Keyword Match
       if (appliedFilters.keyword.trim()) {
         const q = appliedFilters.keyword.toLowerCase().trim()
+        const loc = item.location as { city?: string; state?: string } | string | undefined
         const locString =
-          typeof item.location === 'object' && item.location !== null
-            ? `${item.location.city || ''} ${item.location.state || ''}`.toLowerCase()
-            : typeof item.location === 'string'
-            ? item.location.toLowerCase()
+          typeof loc === 'object' && loc !== null
+            ? `${loc.city || ''} ${loc.state || ''}`.toLowerCase()
+            : typeof loc === 'string'
+            ? String(loc).toLowerCase()
             : ''
         const matchesTitle = item.title?.toLowerCase().includes(q)
         const matchesDesc = item.description?.toLowerCase().includes(q)

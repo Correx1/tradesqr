@@ -16,11 +16,11 @@ export const DUMMY_LISTINGS: Listing[] = [
       _type: 'image',
       asset: { _ref: 'image-car-1', _type: 'reference' },
       url: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80',
-    } as any,
+    },
     gallery: [
-      { _type: 'image', asset: { _ref: 'img-c1-1', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1200&q=80' } as any,
-      { _type: 'image', asset: { _ref: 'img-c1-2', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80' } as any,
-      { _type: 'image', asset: { _ref: 'img-c1-3', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80' } as any,
+      { _type: 'image', asset: { _ref: 'img-c1-1', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1200&q=80' },
+      { _type: 'image', asset: { _ref: 'img-c1-2', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80' },
+      { _type: 'image', asset: { _ref: 'img-c1-3', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80' },
     ],
     description: `Immaculate 2021 Lexus RX 350 F-Sport in Atomic Silver exterior with Rioja Red leather interior.
 
@@ -63,10 +63,10 @@ Direct foreign used from the United States with clean title and zero duty issues
       _type: 'image',
       asset: { _ref: 'image-car-2', _type: 'reference' },
       url: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=80',
-    } as any,
+    },
     gallery: [
-      { _type: 'image', asset: { _ref: 'img-c2-1', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80' } as any,
-      { _type: 'image', asset: { _ref: 'img-c2-2', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=1200&q=80' } as any,
+      { _type: 'image', asset: { _ref: 'img-c2-1', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80' },
+      { _type: 'image', asset: { _ref: 'img-c2-2', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=1200&q=80' },
     ],
     description: `Foreign used 2022 Mercedes-Benz GLE 450 with 3.0L Turbo Inline-6 EQ Boost mild-hybrid powertrain delivering 362hp.
 
@@ -110,9 +110,9 @@ AMG Line exterior/interior package, Burmester 3D surround audio (13 speakers), 6
       _type: 'image',
       asset: { _ref: 'image-car-3', _type: 'reference' },
       url: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80',
-    } as any,
+    },
     gallery: [
-      { _type: 'image', asset: { _ref: 'img-c3-1', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80' } as any,
+      { _type: 'image', asset: { _ref: 'img-c3-1', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80' },
     ],
     description: `2020 Toyota Land Cruiser V8 GXR in perfect condition. Single owner from new — bought by a returning expat and maintained by Toyota Ghana. Now available due to relocation.
 
@@ -154,7 +154,7 @@ Comes with original manuals, service history booklet (14 stamps), and all FRSC/L
       _type: 'image',
       asset: { _ref: 'image-car-4', _type: 'reference' },
       url: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80',
-    } as any,
+    },
     gallery: [],
     description: `Brand new 2023 BMW X5 xDrive40i with full M-Sport package — direct order from Germany. First to view will buy.
 
@@ -199,11 +199,11 @@ Includes BMW Live Cockpit Professional, Harman Kardon sound, Panoramic glass roo
       _type: 'image',
       asset: { _ref: 'image-house-1', _type: 'reference' },
       url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
-    } as any,
+    },
     gallery: [
-      { _type: 'image', asset: { _ref: 'img-h1-1', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80' } as any,
-      { _type: 'image', asset: { _ref: 'img-h1-2', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80' } as any,
-      { _type: 'image', asset: { _ref: 'img-h1-3', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80' } as any,
+      { _type: 'image', asset: { _ref: 'img-h1-1', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80' },
+      { _type: 'image', asset: { _ref: 'img-h1-2', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80' },
+      { _type: 'image', asset: { _ref: 'img-h1-3', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80' },
     ],
     description: `Newly built contemporary 5-bedroom detached mansion situated within a secure, gated estate in Lekki Phase 1.
 
@@ -216,9 +216,7 @@ Title is Governor's Consent — fully perfected and ready for immediate transfer
     status: 'available',
     propertyType: 'Detached',
     bedrooms: 5,
-    bathrooms: 6,
     sizeSqm: 650,
-    furnishingStatus: 'Unfurnished',
     listingPurpose: 'sale',
     features: [
       { label: 'Infinity Swimming Pool', icon: 'pool' },
@@ -255,9 +253,9 @@ Title is Governor's Consent — fully perfected and ready for immediate transfer
       _type: 'image',
       asset: { _ref: 'image-house-2', _type: 'reference' },
       url: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80',
-    } as any,
+    },
     gallery: [
-      { _type: 'image', asset: { _ref: 'img-h2-1', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=1200&q=80' } as any,
+      { _type: 'image', asset: { _ref: 'img-h2-1', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=1200&q=80' },
     ],
     description: `Prestigious 4-bedroom terrace duplex in Old Ikoyi with 24/7 dedicated power generation and manned security post. 
 
@@ -268,9 +266,7 @@ Features custom woodwork throughout, all-ensuite rooms with imported fixtures, b
     status: 'available',
     propertyType: 'Terrace',
     bedrooms: 4,
-    bathrooms: 4,
     sizeSqm: 380,
-    furnishingStatus: 'Semi-Furnished',
     listingPurpose: 'sale',
     features: [
       { label: '24/7 Power Generation', icon: 'generator' },
@@ -301,7 +297,7 @@ Features custom woodwork throughout, all-ensuite rooms with imported fixtures, b
       _type: 'image',
       asset: { _ref: 'image-house-3', _type: 'reference' },
       url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
-    } as any,
+    },
     gallery: [],
     description: `Modern 4-bedroom duplex with picturesque hilltop views in Guzape District, Abuja. This is the only unit available in the close — a rare find.
 
@@ -346,9 +342,9 @@ Fitted with a smart home automation panel controlling lights, gate, and AC, impo
       _type: 'image',
       asset: { _ref: 'image-land-1', _type: 'reference' },
       url: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
-    } as any,
+    },
     gallery: [
-      { _type: 'image', asset: { _ref: 'img-l1-1', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1628624747186-a941c476b7ef?auto=format&fit=crop&w=1200&q=80' } as any,
+      { _type: 'image', asset: { _ref: 'img-l1-1', _type: 'reference' }, url: 'https://images.unsplash.com/photo-1628624747186-a941c476b7ef?auto=format&fit=crop&w=1200&q=80' },
     ],
     description: `Strategic corner-piece dry commercial land directly on the Lekki-Epe Expressway corridor. Ideal for retail plaza, bank branch, corporate headquarters, hotel, or auto dealership showroom.
 
@@ -359,9 +355,7 @@ Fitted with a smart home automation panel controlling lights, gate, and AC, impo
     status: 'available',
     plots: 3,
     landSizeSqm: 2000,
-    fenced: true,
     landPurpose: 'sale',
-    landTitleDocument: 'C of O',
     features: [
       { label: 'Fully Perimeter Fenced', icon: 'fence' },
       { label: '100% Dry Land (No Flood Risk)', icon: 'dry-land' },
@@ -392,7 +386,7 @@ Fitted with a smart home automation panel controlling lights, gate, and AC, impo
       _type: 'image',
       asset: { _ref: 'image-land-2', _type: 'reference' },
       url: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80',
-    } as any,
+    },
     gallery: [],
     description: `Exclusive waterfront land parcel within Banana Island's ultra-premium enclave. Direct, unhindered lagoon-facing frontage with world-class infrastructure — underground utilities, dedicated fiber optic, drainage, and cobblestone roads maintained by the estate.
 

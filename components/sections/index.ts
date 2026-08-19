@@ -5,7 +5,7 @@ export * from './RealEstateShowcase'
 export * from './DigitalCommunityBanner'
 export * from './FAQ'
 export * from './Footer'
-export * from './ListingsHero'
+
 export * from './AboutHero'
 export * from './AboutStory'
 export * from './WhyChooseUs'

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // sanity/schemaTypes/listing.ts
 //
 // Single listing document.
