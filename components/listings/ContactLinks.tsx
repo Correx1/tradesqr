@@ -59,7 +59,7 @@ export function ContactLinks({
             target={formatted.isExternal ? '_blank' : undefined}
             rel={formatted.isExternal ? 'noopener noreferrer' : undefined}
             className={cn(
-              'inline-flex items-center justify-center gap-2 rounded-[2px] px-4 py-2.5 text-sm font-semibold transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary',
+              'inline-flex items-center justify-center gap-2 rounded-[7px] px-4 py-2.5 text-sm font-semibold transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary',
               isPrimary
                 ? 'bg-primary text-white hover:bg-primary/90 shadow-xs'
                 : 'border border-border bg-white text-foreground hover:bg-muted/80'

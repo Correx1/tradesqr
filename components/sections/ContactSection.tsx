@@ -45,7 +45,7 @@ export function ContactSection() {
             {/* Contact Details List */}
             <div className="space-y-6 pt-2">
               <div className="flex items-start gap-3.5">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[3px] bg-primary/10 text-primary">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[7px] bg-primary/10 text-primary">
                   <Phone className="h-5 w-5" />
                 </div>
                 <div>
@@ -57,7 +57,7 @@ export function ContactSection() {
               </div>
 
               <div className="flex items-start gap-3.5">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[3px] bg-primary/10 text-primary">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[7px] bg-primary/10 text-primary">
                   <Mail className="h-5 w-5" />
                 </div>
                 <div>
@@ -69,7 +69,7 @@ export function ContactSection() {
               </div>
 
               <div className="flex items-start gap-3.5">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[3px] bg-primary/10 text-primary">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[7px] bg-primary/10 text-primary">
                   <Clock className="h-5 w-5" />
                 </div>
                 <div>
@@ -92,7 +92,7 @@ export function ContactSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
-                  className="flex h-10 w-10 items-center justify-center rounded-[3px] bg-slate-100 text-slate-700 hover:bg-emerald-500 hover:text-white border border-slate-200 transition-all duration-200"
+                  className="flex h-10 w-10 items-center justify-center rounded-[7px] bg-slate-100 text-slate-700 hover:bg-emerald-500 hover:text-white border border-slate-200 transition-all duration-200"
                 >
                   <MessageSquare className="h-4.5 w-4.5" />
                 </a>
@@ -101,7 +101,7 @@ export function ContactSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Telegram"
-                  className="flex h-10 w-10 items-center justify-center rounded-[3px] bg-slate-100 text-slate-700 hover:bg-sky-500 hover:text-white border border-slate-200 transition-all duration-200"
+                  className="flex h-10 w-10 items-center justify-center rounded-[7px] bg-slate-100 text-slate-700 hover:bg-sky-500 hover:text-white border border-slate-200 transition-all duration-200"
                 >
                   <Send className="h-4.5 w-4.5" />
                 </a>
@@ -110,7 +110,7 @@ export function ContactSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
-                  className="flex h-10 w-10 items-center justify-center rounded-[3px] bg-slate-100 text-slate-700 hover:bg-blue-600 hover:text-white border border-slate-200 transition-all duration-200"
+                  className="flex h-10 w-10 items-center justify-center rounded-[7px] bg-slate-100 text-slate-700 hover:bg-blue-600 hover:text-white border border-slate-200 transition-all duration-200"
                 >
                   <svg className="h-4.5 w-4.5 fill-current" viewBox="0 0 24 24">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
@@ -122,7 +122,7 @@ export function ContactSection() {
 
           {/* Right Column: Clean Inquiry Form Card */}
           <div className="lg:col-span-7">
-            <div className="rounded-[3px] border border-slate-200 bg-white p-6 sm:p-8 shadow-xs">
+            <div className="rounded-[7px] border border-slate-200 bg-white p-6 sm:p-8 shadow-xs">
               <div className="pb-5 border-b border-slate-100 mb-6">
                 <h3 className="font-heading text-lg font-bold text-slate-900">
                   Send a Direct Message
@@ -133,7 +133,7 @@ export function ContactSection() {
               </div>
 
               {submitted ? (
-                <div className="rounded-[3px] border border-emerald-200 bg-emerald-50 p-8 text-center space-y-3">
+                <div className="rounded-[7px] border border-emerald-200 bg-emerald-50 p-8 text-center space-y-3">
                   <CheckCircle2 className="h-10 w-10 text-emerald-600 mx-auto" />
                   <h4 className="font-heading text-base font-bold text-emerald-950">Inquiry Sent Successfully</h4>
                   <p className="text-xs sm:text-sm text-emerald-800 max-w-sm mx-auto">
@@ -142,7 +142,7 @@ export function ContactSection() {
                   <button
                     type="button"
                     onClick={() => setSubmitted(false)}
-                    className="ts-btn-primary mt-3 px-4 py-2 text-xs font-semibold rounded-[3px]"
+                    className="ts-btn-primary mt-3 px-4 py-2 text-xs font-semibold rounded-[7px]"
                   >
                     Send Another Message
                   </button>
@@ -160,7 +160,7 @@ export function ContactSection() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Your full name"
-                      className="w-full rounded-[3px] border border-slate-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-hidden transition-colors"
+                      className="w-full rounded-[7px] border border-slate-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-hidden transition-colors"
                     />
                   </div>
 
@@ -176,7 +176,7 @@ export function ContactSection() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="you@example.com"
-                        className="w-full rounded-[3px] border border-slate-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-hidden transition-colors"
+                        className="w-full rounded-[7px] border border-slate-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-hidden transition-colors"
                       />
                     </div>
 
@@ -190,7 +190,7 @@ export function ContactSection() {
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="+234 800 000 0000"
-                        className="w-full rounded-[3px] border border-slate-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-hidden transition-colors"
+                        className="w-full rounded-[7px] border border-slate-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-hidden transition-colors"
                       />
                     </div>
                   </div>
@@ -203,7 +203,7 @@ export function ContactSection() {
                     <select
                       value={formData.interest}
                       onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-                      className="w-full rounded-[3px] border border-slate-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-slate-800 focus:border-primary focus:outline-hidden transition-colors cursor-pointer"
+                      className="w-full rounded-[7px] border border-slate-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-slate-800 focus:border-primary focus:outline-hidden transition-colors cursor-pointer"
                     >
                       <option value="properties">Real Estate & Property Acquisition</option>
                       <option value="cars">Foreign-Used Vehicles</option>
@@ -225,7 +225,7 @@ export function ContactSection() {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Please specify your budget, target asset location, or consultation requirements..."
-                      className="w-full rounded-[3px] border border-slate-200 bg-white p-3.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-hidden transition-colors resize-none"
+                      className="w-full rounded-[7px] border border-slate-200 bg-white p-3.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-hidden transition-colors resize-none"
                     />
                   </div>
 
@@ -233,7 +233,7 @@ export function ContactSection() {
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="ts-btn-primary w-full inline-flex items-center justify-center gap-2 py-3 rounded-[3px] text-xs sm:text-sm font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-98"
+                      className="ts-btn-primary w-full inline-flex items-center justify-center gap-2 py-3 rounded-[7px] text-xs sm:text-sm font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-98"
                     >
                       <Send className="h-4 w-4" />
                       <span>Submit Inquiry</span>

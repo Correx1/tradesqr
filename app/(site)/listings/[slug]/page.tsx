@@ -174,7 +174,7 @@ export default async function ListingDetailPage({
           <ArrowLeft className="h-3.5 w-3.5" />
           <span>Back to all listings</span>
         </Link>
-        <span className="inline-flex items-center rounded-[2px] bg-primary/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+        <span className="inline-flex items-center rounded-[7px] bg-primary/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
           {categoryTitle}
         </span>
       </div>
@@ -191,16 +191,16 @@ export default async function ListingDetailPage({
           />
 
           {/* Core Title & Specs Header */}
-          <div className="space-y-4 rounded-[2px] border border-border bg-white p-6">
+          <div className="space-y-4 rounded-[7px] border border-border bg-white p-6">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="inline-flex items-center gap-1 rounded-[2px] bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">
+              <span className="inline-flex items-center gap-1 rounded-[7px] bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 <Tag className="h-3 w-3" />
                 {categoryTitle}
               </span>
               {listing.status && (
                 <span
                   className={cn(
-                    'inline-flex items-center rounded-[2px] px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider',
+                    'inline-flex items-center rounded-[7px] px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider',
                     listing.status === 'available'
                       ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                       : listing.status === 'sold'
@@ -250,7 +250,7 @@ export default async function ListingDetailPage({
 
           {/* 4. Description Section */}
           {listing.description && (
-            <div className="rounded-[2px] border border-border bg-white p-6 space-y-3">
+            <div className="rounded-[7px] border border-border bg-white p-6 space-y-3">
               <h2 className="font-heading text-base font-semibold text-foreground">
                 Overview & Description
               </h2>
@@ -264,7 +264,7 @@ export default async function ListingDetailPage({
         {/* Right Column (4 cols): Sticky Contact Card on Desktop */}
         <div className="lg:col-span-4">
           <div className="sticky top-20 space-y-6">
-            <div className="rounded-[2px] border border-border bg-white p-6 shadow-xs space-y-5">
+            <div className="rounded-[7px] border border-border bg-white p-6 shadow-xs space-y-5">
               <div>
                 <span className="text-xs uppercase tracking-wider text-muted-foreground font-medium">
                   Listing Valuation
@@ -290,7 +290,7 @@ export default async function ListingDetailPage({
                 />
               </div>
 
-              <div className="flex items-start gap-2.5 rounded-[2px] bg-muted/50 p-3 text-xs text-muted-foreground border border-border/60">
+              <div className="flex items-start gap-2.5 rounded-[7px] bg-muted/50 p-3 text-xs text-muted-foreground border border-border/60">
                 <ShieldCheck className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                 <span>
                   TradeSqr verifies listing specifications. We advise conducting physical inspection prior to fund transfer.

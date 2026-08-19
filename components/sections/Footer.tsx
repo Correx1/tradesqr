@@ -24,7 +24,7 @@ export function Footer() {
           {/* Brand Logo & Concise Tagline */}
           <div className="space-y-2.5 max-w-md">
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-[3px] transition-transform duration-200 group-hover:scale-105">
+              <div className="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-[7px] transition-transform duration-200 group-hover:scale-105">
                 <Image
                   src="/image.png"
                   alt="TradeSqr Logo"
@@ -70,7 +70,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
-              className="flex h-9 w-9 items-center justify-center rounded-[3px] bg-white/5 text-emerald-400 border border-white/10 hover:bg-emerald-500 hover:text-white transition-all duration-200"
+              className="flex h-9 w-9 items-center justify-center rounded-[7px] bg-white/5 text-emerald-400 border border-white/10 hover:bg-emerald-500 hover:text-white transition-all duration-200"
             >
               <MessageSquare className="h-4 w-4" />
             </a>
@@ -79,21 +79,21 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Telegram"
-              className="flex h-9 w-9 items-center justify-center rounded-[3px] bg-white/5 text-sky-400 border border-white/10 hover:bg-sky-500 hover:text-white transition-all duration-200"
+              className="flex h-9 w-9 items-center justify-center rounded-[7px] bg-white/5 text-sky-400 border border-white/10 hover:bg-sky-500 hover:text-white transition-all duration-200"
             >
               <Send className="h-4 w-4" />
             </a>
             <a
               href="tel:+2348012345678"
               aria-label="Phone"
-              className="flex h-9 w-9 items-center justify-center rounded-[3px] bg-white/5 text-slate-300 border border-white/10 hover:bg-white/15 hover:text-white transition-all duration-200"
+              className="flex h-9 w-9 items-center justify-center rounded-[7px] bg-white/5 text-slate-300 border border-white/10 hover:bg-white/15 hover:text-white transition-all duration-200"
             >
               <Phone className="h-4 w-4" />
             </a>
             <a
               href="mailto:contact@tradesqr.com"
               aria-label="Email"
-              className="flex h-9 w-9 items-center justify-center rounded-[3px] bg-white/5 text-slate-300 border border-white/10 hover:bg-white/15 hover:text-white transition-all duration-200"
+              className="flex h-9 w-9 items-center justify-center rounded-[7px] bg-white/5 text-slate-300 border border-white/10 hover:bg-white/15 hover:text-white transition-all duration-200"
             >
               <Mail className="h-4 w-4" />
             </a>

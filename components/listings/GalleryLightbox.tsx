@@ -70,7 +70,7 @@ export function GalleryLightbox({
       {/* Main Showcase Image */}
       <div
         onClick={() => openLightbox(0)}
-        className="group relative aspect-16/10 w-full cursor-pointer overflow-hidden rounded-[2px] border border-border bg-muted"
+        className="group relative aspect-16/10 w-full cursor-pointer overflow-hidden rounded-[7px] border border-border bg-muted"
       >
         {mainImageUrl && (
           <Image
@@ -85,7 +85,7 @@ export function GalleryLightbox({
         <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/20" />
         <button
           type="button"
-          className="absolute right-3 bottom-3 flex items-center gap-1.5 rounded-[2px] bg-black/75 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur-xs transition-opacity hover:bg-black"
+          className="absolute right-3 bottom-3 flex items-center gap-1.5 rounded-[7px] bg-black/75 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur-xs transition-opacity hover:bg-black"
         >
           <Maximize2 className="h-3.5 w-3.5" />
           <span>View all ({allImages.length})</span>
@@ -105,7 +105,7 @@ export function GalleryLightbox({
                 key={img?.asset?._ref || idx}
                 type="button"
                 onClick={() => openLightbox(idx)}
-                className="group relative aspect-16/10 w-full overflow-hidden rounded-[2px] border border-border bg-muted focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+                className="group relative aspect-16/10 w-full overflow-hidden rounded-[7px] border border-border bg-muted focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
               >
                 {thumbUrl && (
                   <Image
@@ -129,7 +129,7 @@ export function GalleryLightbox({
 
       {/* Lightbox Modal Dialog */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-4xl border-border bg-black/95 p-2 sm:p-4 text-white sm:max-w-5xl rounded-[2px]">
+        <DialogContent className="max-w-4xl border-border bg-black/95 p-2 sm:p-4 text-white sm:max-w-5xl rounded-[7px]">
           <DialogTitle className="sr-only">{title} Gallery</DialogTitle>
           <DialogDescription className="sr-only">
             Image {activeIndex + 1} of {allImages.length}
@@ -137,7 +137,7 @@ export function GalleryLightbox({
 
           <div className="relative flex flex-col items-center justify-center">
             {/* Active Full Image Container */}
-            <div className="relative aspect-16/10 w-full max-h-[75vh] overflow-hidden rounded-[2px] bg-black">
+            <div className="relative aspect-16/10 w-full max-h-[75vh] overflow-hidden rounded-[7px] bg-black">
               {activeImageUrl && (
                 <Image
                   src={activeImageUrl}
@@ -159,7 +159,7 @@ export function GalleryLightbox({
                     e.stopPropagation()
                     prevImage()
                   }}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-[2px] bg-black/60 text-white transition-colors hover:bg-primary focus:outline-hidden"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-[7px] bg-black/60 text-white transition-colors hover:bg-primary focus:outline-hidden"
                   aria-label="Previous photo"
                 >
                   <ChevronLeft className="h-6 w-6" />
@@ -170,7 +170,7 @@ export function GalleryLightbox({
                     e.stopPropagation()
                     nextImage()
                   }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-[2px] bg-black/60 text-white transition-colors hover:bg-primary focus:outline-hidden"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-[7px] bg-black/60 text-white transition-colors hover:bg-primary focus:outline-hidden"
                   aria-label="Next photo"
                 >
                   <ChevronRight className="h-6 w-6" />

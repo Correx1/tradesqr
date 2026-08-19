@@ -28,7 +28,7 @@ export function DocumentsChecklist({ documents, className }: DocumentsChecklistP
   if (docNames.length === 0) return null
 
   return (
-    <div className={cn('rounded-[2px] border border-border bg-white', className)}>
+    <div className={cn('rounded-[7px] border border-border bg-white', className)}>
       <div className="border-b border-border bg-muted/40 px-4 py-3 sm:px-6">
         <h3 className="font-heading text-sm font-semibold uppercase tracking-wider text-foreground">
           Verified Title &amp; Documents
@@ -39,7 +39,7 @@ export function DocumentsChecklist({ documents, className }: DocumentsChecklistP
           {docNames.map((name, idx) => (
             <li
               key={idx}
-              className="flex items-center justify-between rounded-[2px] border border-border bg-muted/30 px-3.5 py-2.5 text-xs font-medium text-foreground"
+              className="flex items-center justify-between rounded-[7px] border border-border bg-muted/30 px-3.5 py-2.5 text-xs font-medium text-foreground"
             >
               <div className="flex items-center gap-2">
                 <FileCheck className="h-4 w-4 shrink-0 text-primary" />

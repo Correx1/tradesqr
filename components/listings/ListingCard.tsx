@@ -153,7 +153,7 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
       whileHover={{ y: -6 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
       className={cn(
-        'group relative flex flex-col overflow-hidden rounded-[3px] border border-border/80 bg-slate-900 shadow-md transition-all duration-300 hover:shadow-xl hover:border-primary/50',
+        'group relative flex flex-col overflow-hidden rounded-xl sm:rounded-2xl border border-border/80 bg-slate-900 shadow-md transition-all duration-300 hover:shadow-xl hover:border-primary/50',
         className
       )}
     >
@@ -169,26 +169,26 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
             fill
             priority={priority}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover transition-transform duration-500 ease-out group-hover:scale-108"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
         ) : (
-          <div className="absolute inset-0 bg-slate-800" />
+          <div className="h-full w-full bg-slate-800" />
         )}
 
-        {/* Multi-layered dark gradient overlay for crystal clear contrast */}
-        <div className="absolute inset-0 z-10 bg-linear-to-t from-slate-950 via-slate-950/65 to-black/30 transition-opacity duration-300 group-hover:via-slate-950/75" />
+        {/* Gradient Overlay for Ultimate Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/25 transition-opacity duration-300 group-hover:from-black/98" />
 
         {/* Top Badges Strip */}
         <div className="relative z-20 flex items-center justify-between p-4">
           {/* Price Pill Tag */}
-          <div className="inline-flex items-center rounded-[3px] bg-white px-3 py-1 shadow-md">
+          <div className="inline-flex items-center rounded-lg bg-white px-3 py-1 shadow-md">
             <span className="font-heading text-xs font-bold tracking-tight text-primary">
               {formattedPrice}
             </span>
           </div>
 
           {/* Category Tag */}
-          <span className="inline-flex items-center rounded-[3px] bg-black/50 px-2.5 py-1 text-[11px] font-medium tracking-wide text-white backdrop-blur-md border border-white/15">
+          <span className="inline-flex items-center rounded-lg bg-black/50 px-2.5 py-1 text-[11px] font-medium tracking-wide text-white backdrop-blur-md border border-white/15">
             {categoryTitle}
           </span>
         </div>

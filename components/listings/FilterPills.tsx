@@ -39,7 +39,7 @@ export function FilterPills({
             aria-selected={isSelected}
             onClick={() => onSelectCategory?.(option.value)}
             className={cn(
-              'inline-flex items-center justify-center rounded-[2px] border px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary',
+              'inline-flex items-center justify-center rounded-[7px] border px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary',
               isSelected
                 ? 'border-primary bg-primary text-white shadow-xs'
                 : 'border-border bg-white text-muted-foreground hover:border-foreground/30 hover:text-foreground'

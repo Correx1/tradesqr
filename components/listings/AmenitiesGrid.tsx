@@ -62,7 +62,7 @@ export function AmenitiesGrid({ features, className }: AmenitiesGridProps) {
   if (!features || features.length === 0) return null
 
   return (
-    <div className={cn('rounded-[2px] border border-border bg-white', className)}>
+    <div className={cn('rounded-[7px] border border-border bg-white', className)}>
       <div className="border-b border-border bg-muted/40 px-4 py-3 sm:px-6">
         <h3 className="font-heading text-sm font-semibold uppercase tracking-wider text-foreground">
           Features &amp; Amenities
@@ -75,7 +75,7 @@ export function AmenitiesGrid({ features, className }: AmenitiesGridProps) {
             return (
               <div
                 key={feature._key ?? idx}
-                className="flex items-center gap-2.5 rounded-[2px] border border-border bg-muted/30 px-3 py-2.5 text-xs font-medium text-foreground transition-colors hover:border-primary/30 hover:bg-primary/5"
+                className="flex items-center gap-2.5 rounded-[7px] border border-border bg-muted/30 px-3 py-2.5 text-xs font-medium text-foreground transition-colors hover:border-primary/30 hover:bg-primary/5"
               >
                 <Icon className="h-4 w-4 shrink-0 text-primary" />
                 <span className="leading-tight">{feature.label}</span>

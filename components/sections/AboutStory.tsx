@@ -39,7 +39,7 @@ export function AboutStory({
           <div className="lg:col-span-6 relative">
             <div className="relative mx-auto max-w-lg lg:max-w-none">
               {/* Main Image Container */}
-              <div className="relative aspect-[4/3] sm:aspect-[5/4] w-full overflow-hidden rounded-[3px] border border-slate-200 bg-slate-100 shadow-lg">
+              <div className="relative aspect-[4/3] sm:aspect-[5/4] w-full overflow-hidden rounded-[7px] border border-slate-200 bg-slate-100 shadow-lg">
                 <Image
                   src={imageSrc}
                   alt="TradeSqr Verification"
@@ -50,7 +50,7 @@ export function AboutStory({
               </div>
 
               {/* Overlapping Floating Stat Badge Card */}
-              <div className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:right-6 rounded-[3px] border border-slate-200/80 bg-white p-5 sm:p-6 shadow-xl z-10 flex flex-col justify-center min-w-[170px] sm:min-w-[200px]">
+              <div className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:right-6 rounded-[7px] border border-slate-200/80 bg-white p-5 sm:p-6 shadow-xl z-10 flex flex-col justify-center min-w-[170px] sm:min-w-[200px]">
                 <div className="flex items-center gap-1.5 text-primary mb-1">
                   <ShieldCheck className="h-4 w-4 text-primary" />
                   <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Direct Trust</span>
@@ -102,7 +102,7 @@ export function AboutStory({
             <div className="pt-2">
               <Link
                 href={ctaHref}
-                className="ts-btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-[3px] text-xs sm:text-sm font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-98"
+                className="ts-btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-[7px] text-xs sm:text-sm font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-98"
               >
                 <span>{ctaText}</span>
                 <ArrowRight className="h-4 w-4" />

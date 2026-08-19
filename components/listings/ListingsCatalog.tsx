@@ -120,7 +120,7 @@ export function ListingsCatalog({ initialListings = [] }: ListingsCatalogProps) 
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       {/* Col 4 (Left Column): Clean Tailored Filter Card */}
       <aside className="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
-        <div className="rounded-[3px] border border-border bg-card p-6 shadow-xs">
+        <div className="rounded-[7px] border border-border bg-card p-6 shadow-xs">
           {/* Header */}
           <div className="flex items-center justify-between pb-4 border-b border-border">
             <div className="flex items-center gap-2 font-heading text-xs sm:text-sm font-bold uppercase tracking-wider text-foreground">
@@ -151,7 +151,7 @@ export function ListingsCatalog({ initialListings = [] }: ListingsCatalogProps) 
                   value={keywordInput}
                   onChange={(e) => setKeywordInput(e.target.value)}
                   placeholder="Keywords, model, title..."
-                  className="w-full rounded-[3px] border border-input bg-background px-3.5 pr-9 py-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-hidden transition-colors shadow-2xs"
+                  className="w-full rounded-[7px] border border-input bg-background px-3.5 pr-9 py-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-hidden transition-colors shadow-2xs"
                 />
                 <Search className="absolute right-3 h-4 w-4 text-muted-foreground pointer-events-none" />
               </div>
@@ -166,7 +166,7 @@ export function ListingsCatalog({ initialListings = [] }: ListingsCatalogProps) 
                 <select
                   value={categoryInput}
                   onChange={(e) => setCategoryInput(e.target.value)}
-                  className="w-full appearance-none rounded-[3px] border border-input bg-background px-3.5 pr-9 py-2.5 text-xs sm:text-sm text-foreground focus:border-primary focus:outline-hidden transition-colors shadow-2xs cursor-pointer"
+                  className="w-full appearance-none rounded-[7px] border border-input bg-background px-3.5 pr-9 py-2.5 text-xs sm:text-sm text-foreground focus:border-primary focus:outline-hidden transition-colors shadow-2xs cursor-pointer"
                 >
                   <option value="all">All Categories</option>
                   <option value="cars">Cars</option>
@@ -187,7 +187,7 @@ export function ListingsCatalog({ initialListings = [] }: ListingsCatalogProps) 
                   <select
                     value={minPriceInput}
                     onChange={(e) => setMinPriceInput(e.target.value)}
-                    className="w-full appearance-none rounded-[3px] border border-input bg-background px-3 pr-8 py-2.5 text-xs sm:text-sm text-foreground focus:border-primary focus:outline-hidden transition-colors shadow-2xs cursor-pointer"
+                    className="w-full appearance-none rounded-[7px] border border-input bg-background px-3 pr-8 py-2.5 text-xs sm:text-sm text-foreground focus:border-primary focus:outline-hidden transition-colors shadow-2xs cursor-pointer"
                   >
                     {MIN_PRICES.map((p) => (
                       <option key={p.label} value={p.value}>
@@ -203,7 +203,7 @@ export function ListingsCatalog({ initialListings = [] }: ListingsCatalogProps) 
                   <select
                     value={maxPriceInput}
                     onChange={(e) => setMaxPriceInput(e.target.value)}
-                    className="w-full appearance-none rounded-[3px] border border-input bg-background px-3 pr-8 py-2.5 text-xs sm:text-sm text-foreground focus:border-primary focus:outline-hidden transition-colors shadow-2xs cursor-pointer"
+                    className="w-full appearance-none rounded-[7px] border border-input bg-background px-3 pr-8 py-2.5 text-xs sm:text-sm text-foreground focus:border-primary focus:outline-hidden transition-colors shadow-2xs cursor-pointer"
                   >
                     {MAX_PRICES.map((p) => (
                       <option key={p.label} value={p.value}>
@@ -220,7 +220,7 @@ export function ListingsCatalog({ initialListings = [] }: ListingsCatalogProps) 
             <div className="pt-2">
               <button
                 type="submit"
-                className="ts-btn-primary w-full inline-flex items-center justify-center gap-2 py-3 rounded-[3px] text-xs sm:text-sm font-bold uppercase tracking-wider shadow-sm transition-all active:scale-98"
+                className="ts-btn-primary w-full inline-flex items-center justify-center gap-2 py-3 rounded-[7px] text-xs sm:text-sm font-bold uppercase tracking-wider shadow-sm transition-all active:scale-98"
               >
                 <Filter className="h-4 w-4" />
                 <span>Apply Filters</span>
@@ -239,7 +239,7 @@ export function ListingsCatalog({ initialListings = [] }: ListingsCatalogProps) 
             ))}
           </div>
         ) : (
-          <div className="rounded-[3px] border border-dashed border-border bg-card p-12 text-center">
+          <div className="rounded-[7px] border border-dashed border-border bg-card p-12 text-center">
             <h3 className="font-heading text-base font-bold text-foreground">No listings found</h3>
             <p className="mt-1 text-xs sm:text-sm text-muted-foreground max-w-sm mx-auto">
               We couldn&apos;t find any listings matching your current filter criteria.
@@ -247,7 +247,7 @@ export function ListingsCatalog({ initialListings = [] }: ListingsCatalogProps) 
             <button
               type="button"
               onClick={handleReset}
-              className="ts-btn-primary mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-[3px] text-xs font-semibold"
+              className="ts-btn-primary mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-[7px] text-xs font-semibold"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               <span>Reset Filters</span>

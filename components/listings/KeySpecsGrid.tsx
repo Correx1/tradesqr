@@ -84,7 +84,7 @@ export function KeySpecsGrid({ listing, className }: KeySpecsGridProps) {
   if (specs.length === 0) return null
 
   return (
-    <div className={cn('rounded-[2px] border border-border bg-white', className)}>
+    <div className={cn('rounded-[7px] border border-border bg-white', className)}>
       <div className="border-b border-border bg-muted/40 px-4 py-3 sm:px-6">
         <h3 className="font-heading text-sm font-semibold uppercase tracking-wider text-foreground">
           Specifications &amp; Details

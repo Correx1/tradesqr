@@ -44,8 +44,8 @@ export function ListingGrid({
 }: ListingGridProps) {
   if (listings.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-[2px] border border-dashed border-border py-16 px-4 text-center">
-        <div className="flex h-12 w-12 items-center justify-center rounded-[2px] bg-muted text-muted-foreground mb-3">
+      <div className="flex flex-col items-center justify-center rounded-[7px] border border-dashed border-border py-16 px-4 text-center">
+        <div className="flex h-12 w-12 items-center justify-center rounded-[7px] bg-muted text-muted-foreground mb-3">
           <Inbox className="h-6 w-6" />
         </div>
         <p className="text-sm font-medium text-muted-foreground">{emptyMessage}</p>
