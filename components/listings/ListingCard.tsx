@@ -163,13 +163,13 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
       >
         {/* Auto-Cycling Image Slideshow */}
         <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
-          <AnimatePresence initial={false}>
+          <AnimatePresence>
             <motion.div
               key={images[currentImageIndex]}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.8, ease: 'easeInOut' }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
               className="absolute inset-0 h-full w-full"
             >
               <Image
