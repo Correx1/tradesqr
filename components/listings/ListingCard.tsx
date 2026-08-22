@@ -1,9 +1,9 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   Calendar,
   ShieldCheck,
@@ -11,10 +11,9 @@ import {
   Bed,
   Maximize2,
   Layers,
-  Clock,
   MapPin,
   FileCheck,
-  CheckCircle2,
+  ArrowRight,
 } from 'lucide-react'
 import { type Listing } from '@/types/listing'
 import { CATEGORIES } from '@/lib/categoryFields'
@@ -28,6 +27,8 @@ export interface ListingCardProps {
 }
 
 export function ListingCard({ listing, priority = false, className }: ListingCardProps) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
   const categoryTitle =
     CATEGORIES.find((c) => c.value === listing.category)?.title || listing.category
 
@@ -36,33 +37,54 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
     priceOnRequest: listing.priceOnRequest,
   })
 
-  const imageUrl = listing.coverImage
-    ? urlForImage(listing.coverImage)?.width(800).height(1000).url()
-    : undefined
+  // Extract all valid images (coverImage + gallery)
+  const images: string[] = []
+  if (listing.coverImage) {
+    const url = listing.coverImage.url || urlForImage(listing.coverImage)?.width(800).height(1000).url()
+    if (url) images.push(url)
+  }
+  if (listing.gallery && Array.isArray(listing.gallery)) {
+    listing.gallery.forEach((img) => {
+      const url = img.url || urlForImage(img)?.width(800).height(1000).url()
+      if (url && !images.includes(url)) images.push(url)
+    })
+  }
+  if (images.length === 0) {
+    images.push('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80')
+  }
 
-  // Dynamically render high-value, relevant attributes (no generic km)
-  const renderKeySpecs = () => {
+  // Automatic image slideshow inside the card
+  useEffect(() => {
+    if (images.length <= 1) return
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length)
+    }, 4000)
+    return () => clearInterval(timer)
+  }, [images.length])
+
+  // Micro Spec Pills Generator
+  const renderSpecPills = () => {
     switch (listing.category) {
       case 'cars': {
         return (
-          <div className="grid grid-cols-2 gap-y-2 gap-x-3 text-xs text-white/90">
-            {listing.condition && (
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="h-4 w-4 shrink-0 text-blue-300" />
-                <span className="truncate">{String(listing.condition)}</span>
-              </div>
-            )}
+          <div className="flex flex-wrap items-center gap-1.5 pt-1">
             {listing.year !== undefined && (
-              <div className="flex items-center gap-1.5">
-                <Calendar className="h-4 w-4 shrink-0 text-blue-300" />
+              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
+                <Calendar className="h-3 w-3 text-blue-400" />
                 <span>{String(listing.year)}</span>
-              </div>
+              </span>
+            )}
+            {listing.condition && (
+              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
+                <ShieldCheck className="h-3 w-3 text-blue-400" />
+                <span className="truncate max-w-[90px]">{String(listing.condition)}</span>
+              </span>
             )}
             {listing.transmission && (
-              <div className="flex items-center gap-1.5 col-span-2">
-                <Sliders className="h-4 w-4 shrink-0 text-blue-300" />
-                <span className="truncate">{String(listing.transmission)}{listing.fuelType ? ` · ${listing.fuelType}` : ''}</span>
-              </div>
+              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
+                <Sliders className="h-3 w-3 text-blue-400" />
+                <span>{String(listing.transmission)}</span>
+              </span>
             )}
           </div>
         )
@@ -71,24 +93,24 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
       case 'realEstate':
       case 'houses': {
         return (
-          <div className="grid grid-cols-2 gap-y-2 gap-x-3 text-xs text-white/90">
+          <div className="flex flex-wrap items-center gap-1.5 pt-1">
             {listing.bedrooms !== undefined && (
-              <div className="flex items-center gap-1.5">
-                <Bed className="h-4 w-4 shrink-0 text-blue-300" />
-                <span>{String(listing.bedrooms)} Bedrooms</span>
-              </div>
+              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
+                <Bed className="h-3 w-3 text-blue-400" />
+                <span>{String(listing.bedrooms)} Beds</span>
+              </span>
             )}
             {listing.sizeSqm !== undefined && (
-              <div className="flex items-center gap-1.5">
-                <Maximize2 className="h-4 w-4 shrink-0 text-blue-300" />
+              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
+                <Maximize2 className="h-3 w-3 text-blue-400" />
                 <span>{new Intl.NumberFormat('en-NG').format(listing.sizeSqm as number)} sqm</span>
-              </div>
+              </span>
             )}
             {listing.titleDocument && (
-              <div className="flex items-center gap-1.5 col-span-2">
-                <FileCheck className="h-4 w-4 shrink-0 text-blue-300" />
-                <span className="truncate">Title: {String(listing.titleDocument)}</span>
-              </div>
+              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
+                <FileCheck className="h-3 w-3 text-blue-400" />
+                <span className="truncate max-w-[100px]">{String(listing.titleDocument)}</span>
+              </span>
             )}
           </div>
         )
@@ -98,46 +120,24 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
         const landArea = listing.landSizeSqm ?? listing.sizeSqm
         const titleDoc = listing.landTitleDocument ?? listing.titleDocument
         return (
-          <div className="grid grid-cols-2 gap-y-2 gap-x-3 text-xs text-white/90">
+          <div className="flex flex-wrap items-center gap-1.5 pt-1">
             {landArea !== undefined && (
-              <div className="flex items-center gap-1.5">
-                <Maximize2 className="h-4 w-4 shrink-0 text-blue-300" />
+              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
+                <Maximize2 className="h-3 w-3 text-blue-400" />
                 <span>{new Intl.NumberFormat('en-NG').format(landArea as number)} sqm</span>
-              </div>
+              </span>
             )}
             {listing.plots !== undefined && (
-              <div className="flex items-center gap-1.5">
-                <Layers className="h-4 w-4 shrink-0 text-blue-300" />
+              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
+                <Layers className="h-3 w-3 text-blue-400" />
                 <span>{String(listing.plots)} {Number(listing.plots) === 1 ? 'Plot' : 'Plots'}</span>
-              </div>
+              </span>
             )}
             {titleDoc && (
-              <div className="flex items-center gap-1.5 col-span-2">
-                <FileCheck className="h-4 w-4 shrink-0 text-blue-300" />
-                <span className="truncate">Title: {String(titleDoc)}</span>
-              </div>
-            )}
-          </div>
-        )
-      }
-
-      case 'services': {
-        const sType = listing.serviceType ? String(listing.serviceType) : null
-        const tTime = listing.turnaroundTime ? String(listing.turnaroundTime) : null
-        if (!sType && !tTime) return null
-        return (
-          <div className="flex flex-col gap-1.5 text-xs text-white/90">
-            {sType && (
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 shrink-0 text-blue-300" />
-                <span className="truncate">{sType}</span>
-              </div>
-            )}
-            {tTime && (
-              <div className="flex items-center gap-1.5">
-                <Clock className="h-4 w-4 shrink-0 text-blue-300" />
-                <span>Turnaround: {tTime}</span>
-              </div>
+              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
+                <FileCheck className="h-3 w-3 text-blue-400" />
+                <span className="truncate max-w-[100px]">{String(titleDoc)}</span>
+              </span>
             )}
           </div>
         )
@@ -153,64 +153,99 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
       whileHover={{ y: -6 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
       className={cn(
-        'group relative flex flex-col overflow-hidden rounded-xl sm:rounded-2xl border border-border/80 bg-slate-900 shadow-md transition-all duration-300 hover:shadow-xl hover:border-primary/50',
+        'group relative flex flex-col overflow-hidden rounded-[32px] sm:rounded-[36px] border border-slate-200 bg-slate-900 shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-primary/50',
         className
       )}
     >
       <Link
         href={`/listings/${listing.slug.current}`}
-        className="relative flex aspect-3/4 sm:aspect-4/5 w-full flex-col justify-between overflow-hidden focus:outline-hidden"
+        className="relative flex aspect-3/4 sm:aspect-4/5 w-full flex-col justify-between overflow-hidden rounded-[32px] sm:rounded-[36px] focus:outline-hidden"
       >
-        {/* Full Card Background Image */}
-        {imageUrl ? (
-          <Image
-            src={imageUrl}
-            alt={listing.title}
-            fill
-            priority={priority}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          />
-        ) : (
-          <div className="h-full w-full bg-slate-800" />
-        )}
+        {/* Auto-Cycling Image Slideshow */}
+        <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={images[currentImageIndex]}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8, ease: 'easeInOut' }}
+              className="absolute inset-0 h-full w-full"
+            >
+              <Image
+                src={images[currentImageIndex]}
+                alt={listing.title}
+                fill
+                priority={priority}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover"
+              />
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-        {/* Gradient Overlay for Ultimate Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/25 transition-opacity duration-300 group-hover:from-black/98" />
+        {/* Bottom-Only Soft Gradient Scrim for Text Readability */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none" />
 
-        {/* Top Badges Strip */}
-        <div className="relative z-20 flex items-center justify-between p-4">
-          {/* Price Pill Tag */}
-          <div className="inline-flex items-center rounded-lg bg-white px-3 py-1 shadow-md">
-            <span className="font-heading text-xs font-bold tracking-tight text-primary">
-              {formattedPrice}
+        {/* Top Badges Strip + Image Progress Dots */}
+        <div className="relative z-20 flex flex-col gap-2 p-4 sm:p-5">
+          <div className="flex items-center justify-between">
+            {/* Bold Price Pill Badge */}
+            <div className="inline-flex items-center rounded-full bg-white px-3.5 py-1 shadow-lg">
+              <span className="font-heading text-xs sm:text-sm font-extrabold tracking-tight text-slate-900">
+                {formattedPrice}
+              </span>
+            </div>
+
+            {/* Category Chip */}
+            <span className="inline-flex items-center rounded-full bg-black/60 px-3 py-1 text-[10.5px] font-semibold uppercase tracking-wider text-slate-200 backdrop-blur-md border border-white/15">
+              {categoryTitle}
             </span>
           </div>
 
-          {/* Category Tag */}
-          <span className="inline-flex items-center rounded-lg bg-black/50 px-2.5 py-1 text-[11px] font-medium tracking-wide text-white backdrop-blur-md border border-white/15">
-            {categoryTitle}
-          </span>
+          {/* Mini Image Indicators (if multiple images exist) */}
+          {images.length > 1 && (
+            <div className="flex items-center gap-1 pt-1">
+              {images.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={cn(
+                    'h-1 rounded-full transition-all duration-300',
+                    idx === currentImageIndex
+                      ? 'w-5 bg-white'
+                      : 'w-1.5 bg-white/40'
+                  )}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* Bottom Information Content */}
-        <div className="relative z-20 flex flex-col justify-end p-5 pt-0 space-y-3">
+        {/* Bottom Frosted Glass Overlay Dock */}
+        <div className="relative z-20 flex flex-col justify-end p-5 sm:p-6 pt-0 space-y-2.5">
           {/* Title & Location */}
           <div>
-            <h3 className="font-heading text-base sm:text-lg font-bold text-white tracking-tight line-clamp-1 group-hover:text-blue-200 transition-colors">
+            <h3 className="font-heading text-base sm:text-lg font-bold text-white tracking-tight line-clamp-1 transition-colors group-hover:text-blue-300">
               {listing.title}
             </h3>
             {listing.location?.city && (
-              <div className="mt-1 flex items-center gap-1 text-xs text-white/70">
-                <MapPin className="h-3.5 w-3.5 shrink-0 text-blue-300" />
-                <span className="truncate">{listing.location.city}{listing.location.state ? `, ${listing.location.state}` : ''}</span>
+              <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-300">
+                <MapPin className="h-3.5 w-3.5 shrink-0 text-blue-400" />
+                <span className="truncate">
+                  {listing.location.city}
+                  {listing.location.state ? `, ${listing.location.state}` : ''}
+                </span>
               </div>
             )}
           </div>
 
-          {/* High-Value Specs Strip */}
-          <div className="pt-2 border-t border-white/15">
-            {renderKeySpecs()}
+          {/* Micro Spec Pills */}
+          {renderSpecPills()}
+
+          {/* Bottom Action Indicator with Slide-In Arrow */}
+          <div className="pt-2.5 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">
+            <span className="tracking-wide">View Details</span>
+            <ArrowRight className="h-3.5 w-3.5 text-blue-400 transition-transform duration-200 group-hover:translate-x-1" />
           </div>
         </div>
       </Link>

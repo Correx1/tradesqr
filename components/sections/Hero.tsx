@@ -1,10 +1,10 @@
 'use client'
 
-import React, { useRef } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, ChevronDown } from 'lucide-react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, EffectFade } from 'swiper/modules'
 import { cn } from '@/lib/utils'
@@ -18,7 +18,8 @@ export interface HeroSlide {
 }
 
 export interface HeroProps {
-  title?: string
+  headingLine1?: string
+  headingLine2?: string
   subtitle?: string
   ctaText?: string
   ctaHref?: string
@@ -49,159 +50,111 @@ const defaultSlides: HeroSlide[] = [
   },
 ]
 
-const textContainer = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.2,
-    },
-  },
-}
-
-const textItem = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
-  },
-}
-
 export function Hero({
-  title = 'Trusted Platform for Properties Listing',
-  subtitle = 'Discover verified properties and opportunities across Nigeria with seamless, direct connections.',
+  headingLine1 = 'Where Verified Assets',
+  headingLine2 = 'Meet Direct Trade.',
+  subtitle = 'Discover verified properties and direct automotive opportunities across Nigeria with seamless, direct connections.',
   ctaText = 'Explore TradeSqr',
   ctaHref = '/listings',
   slides = defaultSlides,
   className,
 }: HeroProps) {
-  const sectionRef = useRef<HTMLElement>(null)
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  })
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '18%'])
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.12])
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
-
   return (
     <section
-      ref={sectionRef}
       data-section="hero"
-      className={cn('w-full', className)}
-      style={{
-        position: 'relative',
-        height: '85vh',
-        minHeight: 560,
-        width: '100%',
-        overflow: 'hidden',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
+      className={cn(
+        'relative isolate h-[95vh] min-h-[600px] w-full overflow-hidden flex items-center',
+        className
+      )}
     >
-      {/* Background slideshow with scroll-linked parallax */}
-      <motion.div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          height: '100%',
-          width: '100%',
-          y: bgY,
-          scale: bgScale,
-        }}
-      >
+      {/* Original Background Slideshow */}
+      <div className="absolute inset-0 -z-20 h-full w-full">
         <Swiper
           modules={[Autoplay, EffectFade]}
           effect="fade"
           fadeEffect={{ crossFade: true }}
           loop
-          autoplay={{ delay: 4500, disableOnInteraction: false }}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
           speed={1200}
           allowTouchMove={false}
-          style={{ height: '100%', width: '100%' }}
+          className="h-full w-full"
         >
           {slides.map((slide) => (
             <SwiperSlide key={slide.image}>
-              <div style={{ position: 'relative', height: '100%', width: '100%' }}>
+              <div className="relative h-full w-full">
                 <Image
                   src={slide.image}
                   alt={slide.alt}
                   fill
                   priority
-                  style={{ objectFit: 'cover' }}
+                  className="object-cover"
                 />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
-      </motion.div>
+      </div>
 
-      {/* Dark overlay — strong top gradient for navbar legibility and center contrast */}
+      {/* Dark Overlay for Readability */}
       <div
+        className="absolute inset-0 -z-10"
         style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 3,
           background:
-            'linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 35%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.9) 100%)',
+            'linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.75) 80%, rgba(0,0,0,0.92) 100%)',
           backgroundColor: 'rgba(0, 0, 0, 0.45)',
         }}
       />
 
-      {/* Centered content, staggered entrance, fades out on scroll */}
-      <motion.div
-        variants={textContainer}
-        initial="hidden"
-        animate="show"
-        className="mx-auto max-w-2xl px-4 text-center"
-        style={{ position: 'relative', zIndex: 10, opacity: contentOpacity }}
-      >
-        <motion.h1
-          variants={textItem}
-          className="text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl"
-        >
-          {title}
-        </motion.h1>
-
-        <motion.p
-          variants={textItem}
-          className="mx-auto mt-4 max-w-lg text-balance text-base text-white/85 sm:text-lg"
-        >
-          {subtitle}
-        </motion.p>
-
-        {/* Single clean primary CTA button styled with predefined design tokens */}
+      {/* Left-Aligned Text Content */}
+      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-12 lg:px-16 w-full pt-16">
         <motion.div
-          variants={textItem}
-          className="mt-8 flex items-center justify-center"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-3xl space-y-6 sm:space-y-8 text-left"
         >
-          <Link
-            href={ctaHref}
-            className="ts-btn-primary group shadow-md"
-          >
-            <span>{ctaText}</span>
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </motion.div>
-      </motion.div>
+          {/* Main Headline */}
+          <h1 className="font-heading text-5xl sm:text-7xl lg:text-[5.5rem] font-bold tracking-tight text-white leading-[1.05]">
+            <span className="block">Where Verified Assets</span>
+            <span className="block">
+              Meet{' '}
+              <span className="relative inline-block text-primary pb-1.5 sm:pb-2">
+                Direct Trade
+                <svg
+                  className="absolute left-0 -bottom-3 sm:-bottom-4 w-full text-primary pointer-events-none"
+                  viewBox="0 0 100 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 5.5C25 2 75 2 99 5.5"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+              .
+            </span>
+          </h1>
 
-      {/* Scroll cue */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        style={{ position: 'absolute', bottom: 28, left: '50%', x: '-50%', zIndex: 10 }}
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <ChevronDown className="h-6 w-6 text-white/70" />
+          {/* Subtitle */}
+          <p className="max-w-xl text-base sm:text-lg text-white/85 font-normal leading-relaxed">
+            {subtitle}
+          </p>
+
+          {/* Action Button */}
+          <div className="pt-2">
+            <Link
+              href={ctaHref}
+              className="ts-btn-primary inline-flex items-center gap-2 rounded-lg bg-primary hover:bg-primary/90 text-white px-7 py-3.5 text-sm font-semibold shadow-md transition-all duration-200 active:scale-95 group"
+            >
+              <span>{ctaText}</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </Link>
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   )
 }

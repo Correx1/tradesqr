@@ -9,11 +9,11 @@ import {
   Bath,
   Maximize2,
   MapPin,
-  Heart,
-  Share2,
   ArrowUpRight,
   ShieldCheck,
   Layers,
+  FileCheck,
+  ArrowRight,
 } from 'lucide-react'
 import { type Listing } from '@/types/listing'
 import { formatPrice, cn } from '@/lib/utils'
@@ -31,7 +31,7 @@ export function RealEstateShowcase({
   heading = 'Prime Real Estate & Land Deals',
   subheading = 'Explore verified luxury residential homes, contemporary duplexes, and prime commercial plots.',
   listings = [],
-  viewAllHref = '/listings',
+  viewAllHref = '/listings?category=realEstate',
   className,
 }: RealEstateShowcaseProps) {
   // Filter for real estate (realEstate, houses + land)
@@ -45,7 +45,7 @@ export function RealEstateShowcase({
   if (!spotlightItem) return null
 
   const spotlightImg = spotlightItem.coverImage
-    ? urlForImage(spotlightItem.coverImage)?.width(1000).height(1000).url()
+    ? urlForImage(spotlightItem.coverImage)?.width(1200).height(900).url()
     : undefined
 
   const spotlightPrice = formatPrice({
@@ -56,27 +56,27 @@ export function RealEstateShowcase({
   return (
     <section
       data-section="real-estate-showcase"
-      className={cn('py-16 sm:py-24 bg-slate-50/70 border-b border-border/80', className)}
+      className={cn('py-16 sm:py-24 bg-slate-50/60 border-b border-slate-100', className)}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-          <div className="max-w-2xl">
-            <div className="mb-2 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+          <div className="max-w-2xl space-y-1.5">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary">
               <ShieldCheck className="h-4 w-4" />
               <span>Verified Properties</span>
             </div>
-            <h2 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
               {heading}
             </h2>
-            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-xl">
               {subheading}
             </p>
           </div>
 
           <Link
             href={viewAllHref}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-primary hover:underline"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-primary hover:underline transition-colors shrink-0"
           >
             <span>Explore All Real Estate</span>
             <ArrowUpRight className="h-4 w-4" />
@@ -85,19 +85,19 @@ export function RealEstateShowcase({
 
         {/* Bento / Asymmetric Spotlight Grid */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-stretch">
-          {/* Left Column: Big Spotlight Card */}
+          {/* Left Column: Flagship Spotlight Card */}
           <div className="lg:col-span-6 flex flex-col">
             <motion.div
-              whileHover={{ y: -4 }}
+              whileHover={{ y: -5 }}
               transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:border-primary/40"
+              className="group relative flex h-full flex-col overflow-hidden rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-3 sm:p-3.5 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-primary/40"
             >
               <Link
                 href={`/listings/${spotlightItem.slug.current}`}
-                className="relative flex h-full min-h-[460px] flex-col justify-between overflow-hidden focus:outline-hidden"
+                className="relative flex h-full flex-col justify-between overflow-hidden rounded-lg sm:rounded-xl focus:outline-hidden"
               >
-                {/* Image Container */}
-                <div className="relative aspect-4/3 sm:aspect-16/11 w-full overflow-hidden bg-slate-100">
+                {/* Media Window */}
+                <div className="relative aspect-4/3 sm:aspect-16/11 w-full overflow-hidden rounded-lg sm:rounded-xl bg-slate-100">
                   {spotlightImg ? (
                     <Image
                       src={spotlightImg}
@@ -105,7 +105,7 @@ export function RealEstateShowcase({
                       fill
                       priority
                       sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                   ) : (
                     <div className="h-full w-full bg-slate-200" />
@@ -113,77 +113,78 @@ export function RealEstateShowcase({
 
                   {/* Top Left Status Badge */}
                   <div className="absolute top-3.5 left-3.5 z-10">
-                    <span className="inline-flex items-center rounded-md bg-white/90 px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-foreground backdrop-blur-md shadow-xs">
-                      {spotlightItem.status === 'available' ? 'AVAILABLE' : spotlightItem.status}
+                    <span className="inline-flex items-center rounded-full bg-white/95 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-900 backdrop-blur-md shadow-sm">
+                      {spotlightItem.status === 'available' ? 'VERIFIED AVAILABLE' : spotlightItem.status}
                     </span>
                   </div>
 
-                  {/* Top Right Action Icons */}
-                  <div className="absolute top-3.5 right-3.5 z-10 flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-foreground backdrop-blur-md shadow-xs transition-colors hover:text-red-500">
-                      <Heart className="h-4 w-4" />
-                    </div>
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-foreground backdrop-blur-md shadow-xs transition-colors hover:text-primary">
-                      <Share2 className="h-4 w-4" />
-                    </div>
+                  {/* Bottom Image Gradient Scrim for Contrast */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+                  {/* Price Overlay on Image */}
+                  <div className="absolute bottom-3.5 left-3.5 z-10">
+                    <span className="inline-flex items-center rounded-full bg-slate-900/90 text-white px-4 py-1.5 font-heading text-lg sm:text-xl font-bold backdrop-blur-md shadow-md">
+                      {spotlightPrice}
+                    </span>
                   </div>
                 </div>
 
                 {/* Body Details */}
-                <div className="flex flex-1 flex-col justify-between p-6">
+                <div className="flex flex-1 flex-col justify-between p-3 sm:p-4 pt-4 space-y-4">
                   <div>
-                    <h3 className="font-heading text-xl font-bold text-foreground line-clamp-1 group-hover:text-primary transition-colors">
-                      {spotlightItem.title}
-                    </h3>
-
-                    {/* Price and Badge */}
-                    <div className="mt-2.5 flex items-center gap-3">
-                      <span className="font-heading text-2xl font-extrabold text-foreground">
-                        {spotlightPrice}
-                      </span>
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="font-heading text-lg sm:text-xl font-bold text-slate-900 line-clamp-1 group-hover:text-primary transition-colors">
+                        {spotlightItem.title}
+                      </h3>
                       {spotlightItem.titleDocument && (
-                        <span className="inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 border border-emerald-200">
-                          {spotlightItem.titleDocument}
+                        <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2.5 py-0.5 text-[11px] font-semibold text-primary border border-blue-200/60 shrink-0">
+                          <FileCheck className="h-3 w-3" />
+                          <span>{spotlightItem.titleDocument}</span>
                         </span>
                       )}
                     </div>
+
+                    {spotlightItem.location?.city && (
+                      <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
+                        <MapPin className="h-3.5 w-3.5 text-slate-400" />
+                        <span>{spotlightItem.location.city}{spotlightItem.location.state ? `, ${spotlightItem.location.state}` : ''}</span>
+                      </div>
+                    )}
                   </div>
 
-                  {/* Specs & Location */}
-                  <div className="mt-6 pt-4 border-t border-border/70 flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
-                    <div className="flex flex-wrap items-center gap-4">
+                  {/* Specs Strip */}
+                  <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600">
+                    <div className="flex flex-wrap items-center gap-3.5">
                       {spotlightItem.bedrooms !== undefined && (
-                        <div className="flex items-center gap-1.5 font-medium text-foreground">
-                          <Bed className="h-4 w-4 text-muted-foreground" />
+                        <div className="flex items-center gap-1.5 font-medium text-slate-700">
+                          <Bed className="h-4 w-4 text-slate-400" />
                           <span>{String(spotlightItem.bedrooms)} Beds</span>
                         </div>
                       )}
                       {spotlightItem.bathrooms !== undefined && (
-                        <div className="flex items-center gap-1.5 font-medium text-foreground">
-                          <Bath className="h-4 w-4 text-muted-foreground" />
+                        <div className="flex items-center gap-1.5 font-medium text-slate-700">
+                          <Bath className="h-4 w-4 text-slate-400" />
                           <span>{String(spotlightItem.bathrooms)} Baths</span>
                         </div>
                       )}
                       {spotlightItem.sizeSqm !== undefined && (
-                        <div className="flex items-center gap-1.5 font-medium text-foreground">
-                          <Maximize2 className="h-4 w-4 text-muted-foreground" />
+                        <div className="flex items-center gap-1.5 font-medium text-slate-700">
+                          <Maximize2 className="h-4 w-4 text-slate-400" />
                           <span>{new Intl.NumberFormat('en-NG').format(spotlightItem.sizeSqm as number)} sqm</span>
                         </div>
                       )}
                       {spotlightItem.plots !== undefined && (
-                        <div className="flex items-center gap-1.5 font-medium text-foreground">
-                          <Layers className="h-4 w-4 text-muted-foreground" />
+                        <div className="flex items-center gap-1.5 font-medium text-slate-700">
+                          <Layers className="h-4 w-4 text-slate-400" />
                           <span>{String(spotlightItem.plots)} {Number(spotlightItem.plots) === 1 ? 'Plot' : 'Plots'}</span>
                         </div>
                       )}
                     </div>
 
-                    {spotlightItem.location?.city && (
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <MapPin className="h-3.5 w-3.5 text-muted-foreground" />
-                        <span>{spotlightItem.location.city}{spotlightItem.location.state ? `, ${spotlightItem.location.state}` : ''}</span>
-                      </div>
-                    )}
+                    <div className="inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:underline">
+                      <span>View Details</span>
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -194,7 +195,7 @@ export function RealEstateShowcase({
           <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
             {gridItems.map((item) => {
               const itemImg = item.coverImage
-                ? urlForImage(item.coverImage)?.width(600).height(400).url()
+                ? urlForImage(item.coverImage)?.width(600).height(450).url()
                 : undefined
 
               const itemPrice = formatPrice({
@@ -205,23 +206,23 @@ export function RealEstateShowcase({
               return (
                 <motion.div
                   key={item._id}
-                  whileHover={{ y: -3 }}
+                  whileHover={{ y: -4 }}
                   transition={{ duration: 0.2, ease: 'easeOut' }}
-                  className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-xs transition-all duration-200 hover:shadow-md hover:border-primary/40"
+                  className="group relative flex flex-col overflow-hidden rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-2.5 sm:p-3 shadow-xs transition-all duration-300 hover:shadow-md hover:border-primary/40"
                 >
                   <Link
                     href={`/listings/${item.slug.current}`}
-                    className="flex h-full flex-col justify-between focus:outline-hidden"
+                    className="flex h-full flex-col justify-between overflow-hidden rounded-lg sm:rounded-xl focus:outline-hidden"
                   >
                     {/* Thumbnail Image */}
-                    <div className="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
+                    <div className="relative aspect-16/10 w-full overflow-hidden rounded-lg sm:rounded-xl bg-slate-100">
                       {itemImg ? (
                         <Image
                           src={itemImg}
                           alt={item.title}
                           fill
                           sizes="(max-width: 640px) 100vw, 25vw"
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                         />
                       ) : (
                         <div className="h-full w-full bg-slate-200" />
@@ -229,45 +230,50 @@ export function RealEstateShowcase({
 
                       {/* Top Left Badge */}
                       <div className="absolute top-2.5 left-2.5 z-10">
-                        <span className="inline-flex items-center rounded-md bg-white/90 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-foreground backdrop-blur-md shadow-2xs">
+                        <span className="inline-flex items-center rounded-full bg-white/95 px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-wider text-slate-900 backdrop-blur-md shadow-xs">
                           {item.status === 'available' ? 'AVAILABLE' : item.status}
                         </span>
                       </div>
 
-                      {/* Top Right Heart Icon */}
-                      <div className="absolute top-2.5 right-2.5 z-10">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/90 text-foreground backdrop-blur-md shadow-2xs hover:text-red-500">
-                          <Heart className="h-3.5 w-3.5" />
-                        </div>
+                      {/* Price Badge on Bottom Left of Image */}
+                      <div className="absolute bottom-2.5 left-2.5 z-10">
+                        <span className="inline-flex items-center rounded-full bg-slate-900/90 text-white px-3 py-1 font-heading text-xs sm:text-sm font-bold backdrop-blur-md shadow-xs">
+                          {itemPrice}
+                        </span>
                       </div>
                     </div>
 
                     {/* Card Content */}
-                    <div className="flex flex-1 flex-col justify-between p-4">
+                    <div className="flex flex-1 flex-col justify-between p-2.5 pt-3 space-y-2">
                       <div>
-                        <h4 className="font-heading text-sm font-bold text-foreground line-clamp-1 group-hover:text-primary transition-colors">
+                        <h4 className="font-heading text-sm font-bold text-slate-900 line-clamp-1 group-hover:text-primary transition-colors">
                           {item.title}
                         </h4>
 
-                        <div className="mt-2 flex items-center gap-2">
-                          <span className="font-heading text-base font-extrabold text-foreground">
-                            {itemPrice}
-                          </span>
-                          {item.priceOnRequest ? null : (
-                            <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 border border-emerald-200">
-                              Negotiable
-                            </span>
-                          )}
-                        </div>
+                        {item.location?.city && (
+                          <div className="mt-1 flex items-center gap-1 text-[11px] text-slate-500">
+                            <MapPin className="h-3 w-3 shrink-0 text-slate-400" />
+                            <span className="truncate">{item.location.city}{item.location.state ? `, ${item.location.state}` : ''}</span>
+                          </div>
+                        )}
                       </div>
 
-                      {/* Bottom Location */}
-                      {item.location?.city && (
-                        <div className="mt-3 pt-2.5 border-t border-border/60 flex items-center gap-1 text-[11px] text-muted-foreground">
-                          <MapPin className="h-3 w-3 shrink-0 text-muted-foreground" />
-                          <span className="truncate">{item.location.city}{item.location.state ? `, ${item.location.state}` : ''}</span>
+                      {/* Specs Mini Strip */}
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-600">
+                        <div className="flex items-center gap-2">
+                          {item.bedrooms !== undefined && (
+                            <span>{String(item.bedrooms)} Beds</span>
+                          )}
+                          {item.sizeSqm !== undefined && (
+                            <span>· {new Intl.NumberFormat('en-NG').format(item.sizeSqm as number)} sqm</span>
+                          )}
+                          {item.plots !== undefined && (
+                            <span>· {String(item.plots)} Plot</span>
+                          )}
                         </div>
-                      )}
+
+                        <ArrowRight className="h-3.5 w-3.5 text-primary transition-transform duration-200 group-hover:translate-x-0.5" />
+                      </div>
                     </div>
                   </Link>
                 </motion.div>

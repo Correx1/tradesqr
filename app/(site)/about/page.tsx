@@ -1,4 +1,4 @@
-import { AboutHero, AboutStory, ServicesStrip, WhyChooseUs, DigitalCommunityBanner } from '@/components/sections'
+import { AboutHero, AboutStory, ServicesStrip, WhyChooseUs,FAQ } from '@/components/sections'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -22,9 +22,7 @@ export default function AboutPage() {
       <WhyChooseUs />
 
       {/* 5. Community / Digital Finance Banner */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
-        <DigitalCommunityBanner />
-      </div>
+     <FAQ/>
     </main>
   )
 }

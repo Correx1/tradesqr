@@ -4,8 +4,8 @@ import {
   ServicesStrip,
   FeaturedListings,
   RealEstateShowcase,
-  DigitalCommunityBanner,
   FAQ,
+  WhyChooseUs,
 } from '@/components/sections'
 import { FadeInSection } from '@/components/motion'
 import { client } from '@/lib/sanity/client'
@@ -69,9 +69,8 @@ export default async function HomePage() {
         <RealEstateShowcase listings={realEstateListings} />
       </FadeInSection>
 
-      {/* 5. Digital Services & Community Short Banner */}
       <FadeInSection direction="up" duration={0.5} delay={0.05}>
-        <DigitalCommunityBanner />
+      <WhyChooseUs/>
       </FadeInSection>
 
       {/* 6. Frequently Asked Questions */}
