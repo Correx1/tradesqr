@@ -43,7 +43,7 @@ export const recentCarsQuery = groq`
 `
 
 export const recentRealEstateQuery = groq`
-  *[_type == "listing" && category == "realEstate"] | order(_createdAt desc)[0...2] {
+  *[_type == "listing" && (category == "realEstate" || category == "realestate")] | order(_createdAt desc)[0...2] {
     _id,
     _type,
     _createdAt,
@@ -67,7 +67,7 @@ export const recentRealEstateQuery = groq`
 
 // 3. Real Estate Showcase — most recent real estate listings (up to 6)
 export const realEstateShowcaseQuery = groq`
-  *[_type == "listing" && category == "realEstate"] | order(_createdAt desc)[0...6] {
+  *[_type == "listing" && (category == "realEstate" || category == "realestate")] | order(_createdAt desc)[0...6] {
     _id,
     _type,
     _createdAt,

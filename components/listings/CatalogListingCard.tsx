@@ -27,18 +27,24 @@ export interface CatalogListingCardProps {
 }
 
 export function CatalogListingCard({ listing, priority = false, className }: CatalogListingCardProps) {
+  // Safe case-insensitive field extractions
+  const categoryRaw = listing.category || (listing as any).Category || ''
+  const category = categoryRaw.toLowerCase()
+
   const categoryTitle =
-    CATEGORIES.find((c) => c.value === listing.category)?.title || listing.category
+    CATEGORIES.find((c) => c.value.toLowerCase() === category)?.title || categoryRaw
 
   const formattedPrice = formatPrice({
     price: listing.price,
     priceOnRequest: listing.priceOnRequest,
   })
 
+  const coverImage = listing.coverImage || (listing as any).coverimage || (listing as any).CoverImage
+
   const imageUrl =
-    (listing.coverImage && urlForImage(listing.coverImage)?.width(800).height(600).url()) ||
-    listing.coverImage?.url ||
-    (typeof listing.coverImage === 'string' ? listing.coverImage : undefined) ||
+    (coverImage && urlForImage(coverImage)?.width(800).height(600).url()) ||
+    (coverImage && (coverImage as any).url) ||
+    (typeof coverImage === 'string' ? coverImage : undefined) ||
     'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80'
 
   const whatsappMessage = encodeURIComponent(

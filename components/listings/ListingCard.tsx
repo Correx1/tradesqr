@@ -29,22 +29,29 @@ export interface ListingCardProps {
 export function ListingCard({ listing, priority = false, className }: ListingCardProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
+  // Safe case-insensitive field extractions
+  const categoryRaw = listing.category || (listing as any).Category || ''
+  const category = categoryRaw.toLowerCase()
+
   const categoryTitle =
-    CATEGORIES.find((c) => c.value === listing.category)?.title || listing.category
+    CATEGORIES.find((c) => c.value.toLowerCase() === category)?.title || categoryRaw
 
   const formattedPrice = formatPrice({
     price: listing.price,
     priceOnRequest: listing.priceOnRequest,
   })
 
-  // Extract all valid images (coverImage + gallery)
+  // Extract all valid images (coverImage + gallery) supporting both camelCase and lowercase names
   const images: string[] = []
-  if (listing.coverImage) {
-    const url = listing.coverImage.url || urlForImage(listing.coverImage)?.width(800).height(1000).url()
+  const coverImage = listing.coverImage || (listing as any).coverimage || (listing as any).CoverImage
+  const gallery = listing.gallery || (listing as any).gallery || (listing as any).Gallery
+
+  if (coverImage) {
+    const url = coverImage.url || urlForImage(coverImage)?.width(800).height(1000).url()
     if (url) images.push(url)
   }
-  if (listing.gallery && Array.isArray(listing.gallery)) {
-    listing.gallery.forEach((img) => {
+  if (gallery && Array.isArray(gallery)) {
+    gallery.forEach((img) => {
       const url = img.url || urlForImage(img)?.width(800).height(1000).url()
       if (url && !images.includes(url)) images.push(url)
     })
@@ -64,7 +71,7 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
 
   // Micro Spec Pills Generator
   const renderSpecPills = () => {
-    switch (listing.category) {
+    switch (category) {
       case 'cars': {
         return (
           <div className="flex flex-wrap items-center gap-1.5 pt-1">
@@ -90,7 +97,8 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
         )
       }
 
-      case 'realEstate':
+      case 'realestate':
+      case 'realestate':
       case 'houses': {
         return (
           <div className="flex flex-wrap items-center gap-1.5 pt-1">

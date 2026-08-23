@@ -34,18 +34,20 @@ export function RealEstateShowcase({
   viewAllHref = '/listings?category=realEstate',
   className,
 }: RealEstateShowcaseProps) {
-  // Filter for real estate (realEstate, houses + land)
-  const realEstateListings = listings.filter(
-    (l) => l.category === 'realEstate' || l.category === 'houses' || l.category === 'land'
-  )
+  // Filter for real estate (realEstate, houses + land) supporting case variations
+  const realEstateListings = listings.filter((l) => {
+    const cat = (l.category || (l as any).Category || '').toLowerCase()
+    return cat === 'realestate' || cat === 'houses' || cat === 'land'
+  })
 
   const spotlightItem = realEstateListings[0]
   const gridItems = realEstateListings.slice(1, 5)
 
   if (!spotlightItem) return null
 
-  const spotlightImg = spotlightItem.coverImage
-    ? urlForImage(spotlightItem.coverImage)?.width(1200).height(900).url()
+  const spotlightCoverImage = spotlightItem.coverImage || (spotlightItem as any).coverimage || (spotlightItem as any).CoverImage
+  const spotlightImg = spotlightCoverImage
+    ? urlForImage(spotlightCoverImage)?.width(1200).height(900).url()
     : undefined
 
   const spotlightPrice = formatPrice({
@@ -194,8 +196,9 @@ export function RealEstateShowcase({
           {/* Right Column: 2x2 Grid of 4 Properties */}
           <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
             {gridItems.map((item) => {
-              const itemImg = item.coverImage
-                ? urlForImage(item.coverImage)?.width(600).height(450).url()
+              const itemCoverImage = item.coverImage || (item as any).coverimage || (item as any).CoverImage
+              const itemImg = itemCoverImage
+                ? urlForImage(itemCoverImage)?.width(600).height(450).url()
                 : undefined
 
               const itemPrice = formatPrice({
