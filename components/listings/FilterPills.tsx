@@ -18,7 +18,7 @@ export function FilterPills({
   className,
 }: FilterPillsProps) {
   const options: { value: FilterCategory; label: string }[] = [
-    { value: 'all', label: 'All Listings' },
+    { value: 'all', label: 'All listings' },
     ...CATEGORIES.map((c) => ({ value: c.value, label: c.title })),
   ]
 
@@ -39,10 +39,10 @@ export function FilterPills({
             aria-selected={isSelected}
             onClick={() => onSelectCategory?.(option.value)}
             className={cn(
-              'inline-flex items-center justify-center rounded-[7px] border px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary',
+              'inline-flex items-center justify-center rounded-full border px-4 py-2 text-xs font-semibold transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary',
               isSelected
-                ? 'border-primary bg-primary text-white shadow-xs'
-                : 'border-border bg-white text-muted-foreground hover:border-foreground/30 hover:text-foreground'
+                ? 'border-primary bg-primary text-primary-foreground shadow-xs'
+                : 'border-border bg-card text-muted-foreground hover:border-foreground/30 hover:text-foreground'
             )}
           >
             {option.label}

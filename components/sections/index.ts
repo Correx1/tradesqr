@@ -1,4 +1,6 @@
 export * from './Hero'
+export * from './CategoryTiles'
+export * from './ListingsShowcase'
 export * from './ServicesStrip'
 export * from './FeaturedListings'
 export * from './RealEstateShowcase'
@@ -9,3 +11,4 @@ export * from './AboutStory'
 export * from './WhyChooseUs'
 export * from './ContactHero'
 export * from './ContactSection'
+

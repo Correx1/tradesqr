@@ -1,9 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
-import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, HelpCircle, MessageSquare, ShieldCheck, ArrowRight } from 'lucide-react'
+import { ChevronDown, HelpCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export interface FAQItem {
@@ -20,7 +19,7 @@ export interface FAQProps {
 
 export function FAQ({
   heading = 'Frequently Asked Questions',
-  subheading = 'Clear answers regarding TradeSqr verified listings, direct seller contact, independent inspections, and digital services.',
+  subheading = 'Clear answers regarding TradeSqr verified listings, direct seller contact, independent physical inspections, and digital services.',
   items,
   className,
 }: FAQProps) {
@@ -28,17 +27,17 @@ export function FAQ({
     {
       question: 'How do I purchase or inquire about a listing on TradeSqr?',
       answer:
-        'TradeSqr is a direct-connect platform with zero middleman fees or on-site checkout. On any listing page, click the WhatsApp, Phone, or Email button to communicate directly with the verified seller or our executive team.',
+        'TradeSqr is a direct-trade platform with zero middleman markups. On any listing page, click the WhatsApp, Phone, or Email button to communicate directly with the verified seller or our executive advisory desk.',
     },
     {
       question: 'Are payments handled on TradeSqr?',
       answer:
-        'No payments are processed on this website. All financial negotiations and transactions occur directly between you and the verified listing owner. We recommend commissioning our physical inspection or title verification service prior to releasing funds.',
+        'No payments are processed directly on this website. All financial negotiations and transactions occur directly between you and the verified listing owner. We recommend commissioning our physical inspection or title verification service prior to releasing funds.',
     },
     {
       question: 'What does "Price on Request" mean?',
       answer:
-        'High-value assets, prime waterfront land, and custom commercial contracts often require personalized terms. Tapping the contact link connects you immediately with the broker for current quotes and payment arrangements.',
+        'High-value assets, prime waterfront land, and custom commercial properties often require personalized terms. Tapping the contact button connects you immediately with the owner or broker for current quotes and payment arrangements.',
     },
     {
       question: 'Can I request an independent vehicle or property inspection?',
@@ -67,18 +66,18 @@ export function FAQ({
   return (
     <section
       data-section="faq"
-      className={cn('py-20 sm:py-28 bg-slate-50/60 border-b border-border/80', className)}
+      className={cn('py-20 sm:py-28 bg-secondary border-b border-border/80', className)}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Sticky Support Column */}
           <div className="lg:col-span-5 lg:sticky lg:top-24">
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 border border-primary/20 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary mb-4">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 border border-primary/20 px-3.5 py-1 text-xs font-medium text-primary mb-4">
               <HelpCircle className="h-3.5 w-3.5" />
-              <span>Help & Guidelines</span>
+              <span>Help & guidelines</span>
             </div>
 
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-foreground leading-tight">
+            <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-tight text-foreground leading-tight">
               {heading}
             </h2>
 
@@ -95,23 +94,23 @@ export function FAQ({
                 <div
                   key={idx}
                   className={cn(
-                    'rounded-xl border bg-white transition-all duration-200 shadow-2xs',
-                    isOpen ? 'border-primary/40 shadow-xs' : 'border-border hover:border-border/80'
+                    'rounded-lg border bg-card transition-all duration-200 shadow-xs',
+                    isOpen ? 'border-primary/50 shadow-sm' : 'border-border hover:border-border/80'
                   )}
                 >
                   <button
                     type="button"
                     onClick={() => toggle(idx)}
-                    className="flex w-full items-center justify-between p-5 text-left font-heading text-sm sm:text-base font-semibold text-foreground focus:outline-hidden"
+                    className="flex w-full items-center justify-between p-5 text-left font-heading text-sm sm:text-base font-medium text-foreground focus:outline-hidden"
                     aria-expanded={isOpen}
                   >
-                    <span className={cn('pr-4 transition-colors', isOpen ? 'text-primary' : 'text-foreground')}>
+                    <span className={cn('pr-4 transition-colors', isOpen ? 'text-primary font-semibold' : 'text-foreground')}>
                       {item.question}
                     </span>
                     <div
                       className={cn(
                         'flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-all duration-200',
-                        isOpen ? 'bg-primary/10 text-primary rotate-180' : 'bg-muted text-muted-foreground'
+                        isOpen ? 'bg-primary/15 text-primary rotate-180' : 'bg-muted text-muted-foreground'
                       )}
                     >
                       <ChevronDown className="h-4 w-4" />
@@ -142,3 +141,6 @@ export function FAQ({
     </section>
   )
 }
+
+export default FAQ
+

@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export interface ServiceItem {
@@ -22,9 +21,9 @@ export interface ServicesStripProps {
 }
 
 export function ServicesStrip({
-  eyebrow = 'CORE CAPABILITIES',
-  heading = 'Core Solutions & Capabilities',
-  subheading = 'Beyond marketplace listings, TradeSqr offers dedicated operational support, asset verification, and consultation services.',
+  eyebrow = 'Core capabilities',
+  heading = 'Specialized Solutions & Direct Advisory',
+  subheading = 'Beyond direct marketplace listings, TradeSqr provides professional physical inspection, legal title documentation, and digital advisory services.',
   buttonText = 'Contact Us',
   buttonHref = '/contact',
   services,
@@ -33,34 +32,34 @@ export function ServicesStrip({
   const defaultServices: ServiceItem[] = [
     {
       id: 'properties-listing',
-      categoryTag: 'LISTINGS & REACH',
-      title: 'Properties Listing',
+      categoryTag: 'Listings & reach',
+      title: 'Properties Listing & Showcase',
       description:
-        'Strategic showcase and verified promotion of premium real estate, land plots, and automotive assets to high-intent buyers nationwide.',
+        'Strategic placement and verified promotion of premium real estate, land plots, and automotive assets to high-intent buyers nationwide.',
       href: '/contact?service=properties-listing',
     },
     {
       id: 'real-estate',
-      categoryTag: 'REAL ESTATE',
-      title: 'Real Estate Properties Deal',
+      categoryTag: 'Real estate',
+      title: 'Real Estate Transactions & Advisory',
       description:
-        'End-to-end guidance and brokerage for purchasing, renting, and investing in verified residential homes, commercial spaces, and registered land.',
+        'End-to-end guidance for purchasing, leasing, and investing in inspected residential homes, commercial properties, and registered plots.',
       href: '/contact?service=real-estate',
     },
     {
       id: 'ai-solutions',
-      categoryTag: 'AI & TECHNOLOGY',
+      categoryTag: 'AI & technology',
       title: 'AI Business Solutions',
       description:
-        'Intelligent automation, smart workflows, and tailored AI integrations engineered to optimize operations and accelerate business growth.',
+        'Intelligent workflow automation and bespoke AI integrations engineered to streamline operations and enhance productivity.',
       href: '/contact?service=ai-solutions',
     },
     {
       id: 'finance-trade',
-      categoryTag: 'DIGITAL FINANCE',
+      categoryTag: 'Digital finance',
       title: 'Digital Finance Education & Trade',
       description:
-        'Practical training, market insights, and structured mentorship in digital assets, financial markets, and modern trading strategies.',
+        'Practical market insights, digital asset training, and structured mentorship in modern financial markets and portfolio strategies.',
       href: '/contact?service=finance-education',
     },
   ]
@@ -71,83 +70,27 @@ export function ServicesStrip({
     <section
       data-section="services-strip"
       className={cn(
-        'relative overflow-hidden text-white py-20 sm:py-28 border-b border-slate-800/80',
+        'relative overflow-hidden bg-[#121214] text-[#FAFAF8] py-20 sm:py-28 border-b border-border/60',
         className
       )}
     >
-      {/* Background layer */}
-      <div className="pointer-events-none absolute inset-0 bg-[#050811] z-0" />
-
-      {/* Sleek, premium light beam striking from top-left to bottom-right (Dimmed) */}
-      <div className="pointer-events-none absolute inset-0 z-1 overflow-hidden">
-        {/* Ambient top-left lighting (Dimmed) */}
-        <div className="absolute -top-32 -left-32 h-[400px] w-[400px] rounded-full bg-blue-500/8 blur-[120px]" />
-        
-        {/* Ambient bottom-right helper glow (Dimmed) */}
-        <div className="absolute -bottom-32 -right-32 h-[400px] w-[400px] rounded-full bg-indigo-500/5 blur-[120px]" />
-
-        {/* Sharp center laser glow core line (Dimmed) */}
-        <div 
-          className="absolute opacity-20 blur-xs"
-          style={{
-            top: '-10%',
-            left: '-10%',
-            width: '150%',
-            height: '2px',
-            background: 'linear-gradient(90deg, rgba(59,130,246,0) 0%, rgba(96,165,250,0.6) 30%, rgba(255,255,255,0.8) 50%, rgba(56,189,248,0.6) 70%, rgba(30,58,138,0) 100%)',
-            transform: 'rotate(26deg)',
-            transformOrigin: 'top left',
-          }}
-        />
-
-        {/* Medium supporting glow (Dimmed) */}
-        <div 
-          className="absolute opacity-12 blur-md"
-          style={{
-            top: '-15%',
-            left: '-15%',
-            width: '155%',
-            height: '12px',
-            background: 'linear-gradient(90deg, rgba(37,99,235,0) 0%, rgba(56,189,248,0.4) 45%, rgba(96,165,250,0.4) 55%, rgba(37,99,235,0) 100%)',
-            transform: 'rotate(26deg)',
-            transformOrigin: 'top left',
-          }}
-        />
-
-        {/* Wide soft atmospheric light leak (Dimmed) */}
-        <div 
-          className="absolute opacity-8 blur-3xl"
-          style={{
-            top: '-25%',
-            left: '-20%',
-            width: '160%',
-            height: '220px',
-            background: 'linear-gradient(90deg, rgba(37,99,235,0) 0%, rgba(37,99,235,0.3) 40%, rgba(56,189,248,0.2) 60%, rgba(37,99,235,0) 100%)',
-            transform: 'rotate(26deg)',
-            transformOrigin: 'top left',
-          }}
-        />
-      </div>
-
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 items-start">
           {/* Left Column: Eyebrow, Heading, Subheading & Contact CTA Button */}
           <div className="lg:col-span-5 flex flex-col justify-between">
-            <div>
+            <div className="space-y-4">
               {/* Eyebrow Label */}
-              <div className="mb-4 inline-block">
-                <span className="text-xs font-medium uppercase tracking-widest text-primary">
-                  {eyebrow}
-                </span>
-              </div>
+              <span className="text-xs font-medium text-primary tracking-wide">
+                {eyebrow}
+              </span>
 
               {/* Heading */}
-              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white leading-[1.15]">
+              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-[#FAFAF8] leading-[1.15]">
                 {heading}
               </h2>
 
               {/* Subheading */}
-              <p className="mt-5 text-sm sm:text-base font-normal text-slate-400 leading-relaxed max-w-md">
+              <p className="text-sm sm:text-base font-normal text-[#E4E1D9]/80 leading-relaxed max-w-md">
                 {subheading}
               </p>
             </div>
@@ -156,10 +99,9 @@ export function ServicesStrip({
             <div className="mt-8 sm:mt-10">
               <Link
                 href={buttonHref}
-                className="ts-btn-primary group inline-flex items-center gap-2 rounded-md bg-primary hover:bg-primary/90 text-white px-5 py-2.5 text-sm font-medium shadow-md transition-all active:scale-98"
+                className="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 text-sm font-semibold rounded-full shadow-xs transition-all active:scale-95"
               >
-                <span>{buttonText}</span>
-                <ArrowRight className="h-4 w-4 stroke-[1.75] transition-transform group-hover:translate-x-1" />
+                {buttonText}
               </Link>
             </div>
           </div>
@@ -168,21 +110,21 @@ export function ServicesStrip({
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-12">
             {items.map((item) => (
               <div key={item.id} className="group flex flex-col justify-between space-y-3">
-                <div>
+                <div className="space-y-2">
                   {/* Category Tag */}
                   {item.categoryTag && (
-                    <span className="text-[11px] font-medium uppercase tracking-wider text-slate-400">
+                    <span className="text-[11px] font-medium text-primary/90 tracking-wide">
                       {item.categoryTag}
                     </span>
                   )}
 
                   {/* Service Title */}
-                  <h3 className="mt-1.5 font-heading text-lg sm:text-xl font-semibold text-white group-hover:text-blue-300 transition-colors">
+                  <h3 className="font-heading text-lg sm:text-xl font-medium text-[#FAFAF8] group-hover:text-primary transition-colors">
                     {item.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="mt-2.5 text-xs sm:text-sm font-normal text-slate-300/85 leading-relaxed">
+                  <p className="text-xs sm:text-sm font-normal text-[#E4E1D9]/75 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -191,10 +133,9 @@ export function ServicesStrip({
                 <div className="pt-2">
                   <Link
                     href={item.href}
-                    className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-blue-400 group-hover:gap-2 transition-all"
+                    className="inline-flex items-center text-xs font-medium text-primary hover:underline underline-offset-4 transition-all"
                   >
-                    <span>Contact Us</span>
-                    <ArrowRight className="h-3.5 w-3.5 stroke-[1.75]" />
+                    Contact Us
                   </Link>
                 </div>
               </div>
@@ -205,3 +146,6 @@ export function ServicesStrip({
     </section>
   )
 }
+
+export default ServicesStrip
+

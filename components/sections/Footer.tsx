@@ -1,109 +1,166 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { MessageSquare, Send, Phone, Mail } from 'lucide-react'
+import { MessageSquare, Phone, Mail, Send } from 'lucide-react'
 
 export function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
-    <footer className="relative overflow-hidden bg-[#020612] text-slate-400 border-t border-slate-800/80">
-      {/* 1. Giant Background Watermark Text "TRADESQR" */}
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center select-none overflow-hidden z-0">
-        <span className="font-heading font-black text-[15vw] sm:text-[18vw] tracking-tighter text-white/[0.03] uppercase leading-none transform translate-y-4">
-          TRADESQR
-        </span>
-      </div>
-
-      {/* 2. Dark Shining Radial & Linear Lighting Overlays */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,rgba(37,99,235,0.18),rgba(0,0,0,0))]" />
-      <div className="pointer-events-none absolute -bottom-32 left-1/2 -translate-x-1/2 h-64 w-[600px] rounded-full bg-blue-600/10 blur-[120px] z-0" />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-[#020612]/70 via-transparent to-[#020612]/90" />
-
-      {/* 3. Foreground Footer Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-white/[0.08]">
-          {/* Brand Logo & Concise Tagline */}
-          <div className="space-y-2.5 max-w-md">
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-[7px] transition-transform duration-200 group-hover:scale-105">
+    <footer className="bg-[#121214] text-[#E4E1D9] border-t border-[#26262A]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5 pb-12 border-b border-[#26262A]">
+          {/* Brand & Mission (2 cols on lg) */}
+          <div className="space-y-4 lg:col-span-2">
+            <Link href="/" className="inline-flex items-center gap-2.5 group">
+              <div className="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-xs transition-transform duration-200 group-hover:scale-105">
                 <Image
                   src="/image.png"
-                  alt="TradeSqr Logo"
+                  alt="TradeSqr logo"
                   width={32}
                   height={32}
                   className="h-full w-full object-contain"
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-heading text-lg sm:text-xl font-extrabold tracking-tight uppercase leading-none text-white">
+                <span className="font-heading text-lg sm:text-xl font-bold tracking-tight text-[#FAFAF8] leading-none">
                   TradeSqr
                 </span>
-                <span className="text-[8.5px] italic font-medium tracking-wider mt-0.5 leading-none text-slate-400">
-                  Direct & Verified
+                <span className="text-[11px] font-medium mt-0.5 leading-none text-primary">
+                  Direct &amp; verified
                 </span>
               </div>
             </Link>
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Verified hub for direct property listings, automotive assets, and digital services.
+
+            <p className="text-xs sm:text-sm text-[#DAD6CC]/70 leading-relaxed max-w-sm">
+              Direct, verified marketplace for premium vehicles, residential &amp; commercial real estate, and registered land plots across Nigeria. Zero middleman markups.
             </p>
+
+            {/* Social channels */}
+            <div className="flex items-center gap-2.5 pt-2">
+              <a
+                href="https://wa.me/2348012345678"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1A1A1E] text-[#DAD6CC] border border-[#26262A] hover:bg-primary hover:text-[#121214] hover:border-primary transition-colors"
+              >
+                <MessageSquare className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href="https://t.me/tradesqr"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Telegram"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1A1A1E] text-[#DAD6CC] border border-[#26262A] hover:bg-primary hover:text-[#121214] hover:border-primary transition-colors"
+              >
+                <Send className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href="tel:+2348012345678"
+                aria-label="Phone"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1A1A1E] text-[#DAD6CC] border border-[#26262A] hover:bg-primary hover:text-[#121214] hover:border-primary transition-colors"
+              >
+                <Phone className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href="mailto:support@tradesqr.ng"
+                aria-label="Email"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1A1A1E] text-[#DAD6CC] border border-[#26262A] hover:bg-primary hover:text-[#121214] hover:border-primary transition-colors"
+              >
+                <Mail className="h-3.5 w-3.5" />
+              </a>
+            </div>
           </div>
 
-          {/* Clean Navigation Links */}
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm font-medium text-slate-300">
-            <Link href="/" className="hover:text-white transition-colors">
-              Home
-            </Link>
-            <Link href="/listings" className="hover:text-white transition-colors">
-              Listings
-            </Link>
-            <Link href="/about" className="hover:text-white transition-colors">
-              About
-            </Link>
-            <Link href="/contact" className="hover:text-white transition-colors">
-              Contact
-            </Link>
+          {/* Column 2: Browse */}
+          <div className="space-y-3">
+            <h3 className="font-heading text-sm font-semibold text-[#FAFAF8]">
+              Browse assets
+            </h3>
+            <ul className="space-y-2 text-xs sm:text-sm text-[#DAD6CC]/75">
+              <li>
+                <Link href="/listings?category=cars" className="hover:text-primary transition-colors">
+                  Verified vehicles
+                </Link>
+              </li>
+              <li>
+                <Link href="/listings?category=realEstate" className="hover:text-primary transition-colors">
+                  Real estate &amp; homes
+                </Link>
+              </li>
+              <li>
+                <Link href="/listings?category=land" className="hover:text-primary transition-colors">
+                  Registered land plots
+                </Link>
+              </li>
+              <li>
+                <Link href="/listings" className="hover:text-primary transition-colors">
+                  All listings
+                </Link>
+              </li>
+            </ul>
           </div>
 
-          {/* Quick Direct Social Channels */}
-          <div className="flex items-center gap-3">
-            <a
-              href="https://wa.me/2348012345678"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp"
-              className="flex h-9 w-9 items-center justify-center rounded-[7px] bg-white/5 text-emerald-400 border border-white/10 hover:bg-emerald-500 hover:text-white transition-all duration-200"
-            >
-              <MessageSquare className="h-4 w-4" />
-            </a>
-            <a
-              href="https://t.me/tradesqr"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Telegram"
-              className="flex h-9 w-9 items-center justify-center rounded-[7px] bg-white/5 text-sky-400 border border-white/10 hover:bg-sky-500 hover:text-white transition-all duration-200"
-            >
-              <Send className="h-4 w-4" />
-            </a>
-            <a
-              href="tel:+2348012345678"
-              aria-label="Phone"
-              className="flex h-9 w-9 items-center justify-center rounded-[7px] bg-white/5 text-slate-300 border border-white/10 hover:bg-white/15 hover:text-white transition-all duration-200"
-            >
-              <Phone className="h-4 w-4" />
-            </a>
-            <a
-              href="mailto:contact@tradesqr.com"
-              aria-label="Email"
-              className="flex h-9 w-9 items-center justify-center rounded-[7px] bg-white/5 text-slate-300 border border-white/10 hover:bg-white/15 hover:text-white transition-all duration-200"
-            >
-              <Mail className="h-4 w-4" />
-            </a>
+          {/* Column 3: Company */}
+          <div className="space-y-3">
+            <h3 className="font-heading text-sm font-semibold text-[#FAFAF8]">
+              Company
+            </h3>
+            <ul className="space-y-2 text-xs sm:text-sm text-[#DAD6CC]/75">
+              <li>
+                <Link href="/about" className="hover:text-primary transition-colors">
+                  About TradeSqr
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-primary transition-colors">
+                  Contact desk
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-primary transition-colors">
+                  Verification standard
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-primary transition-colors">
+                  Partner with us
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4: Direct Desk */}
+          <div className="space-y-3">
+            <h3 className="font-heading text-sm font-semibold text-[#FAFAF8]">
+              Direct desk
+            </h3>
+            <ul className="space-y-2 text-xs sm:text-sm text-[#DAD6CC]/75">
+              <li>
+                <a href="tel:+2348012345678" className="hover:text-primary transition-colors">
+                  +234 801 234 5678
+                </a>
+              </li>
+              <li>
+                <a href="mailto:support@tradesqr.ng" className="hover:text-primary transition-colors">
+                  support@tradesqr.ng
+                </a>
+              </li>
+              <li className="text-xs text-[#DAD6CC]/50 pt-1">
+                Mon – Sat: 8:00 AM – 7:00 PM
+              </li>
+              <li className="text-xs text-[#DAD6CC]/50">
+                Lagos &amp; Abuja, Nigeria
+              </li>
+            </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>&copy; {new Date().getFullYear()} TradeSqr. All rights reserved.</p>
-          <p className="text-[11px] text-slate-400">Verified Marketplace & Direct Connection Hub</p>
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#DAD6CC]/60">
+          <p>&copy; {currentYear} TradeSqr. All rights reserved.</p>
+          <p>Direct marketplace &amp; verification hub</p>
         </div>
       </div>
     </footer>

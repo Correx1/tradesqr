@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { ListingsCatalog } from '@/components/listings'
 import { ListingsHero } from '@/components/sections/ListingsHero'
 import { client } from '@/lib/sanity/client'
@@ -34,8 +35,11 @@ export default async function ListingsPage() {
 
       {/* 2. Listings Catalog Container */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <ListingsCatalog initialListings={listings} />
+        <Suspense fallback={<div className="py-12 text-center text-muted-foreground">Loading catalog...</div>}>
+          <ListingsCatalog initialListings={listings} />
+        </Suspense>
       </div>
     </main>
   )
 }
+

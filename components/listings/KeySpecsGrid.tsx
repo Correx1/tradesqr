@@ -22,7 +22,7 @@ type SpecItem = {
 function buildCarSpecs(listing: Listing): SpecItem[] {
   const specs: SpecItem[] = []
   if (listing.make && listing.model)
-    specs.push({ label: 'Make / Model', value: `${listing.make} ${listing.model}`, icon: <Car className="h-4 w-4" /> })
+    specs.push({ label: 'Make / model', value: `${listing.make} ${listing.model}`, icon: <Car className="h-4 w-4" /> })
   if (listing.year)
     specs.push({ label: 'Year', value: String(listing.year), icon: <Calendar className="h-4 w-4" /> })
   if (listing.condition)
@@ -30,7 +30,7 @@ function buildCarSpecs(listing: Listing): SpecItem[] {
   if (listing.transmission)
     specs.push({ label: 'Transmission', value: listing.transmission as string, icon: <Settings2 className="h-4 w-4" /> })
   if (listing.fuelType)
-    specs.push({ label: 'Fuel Type', value: listing.fuelType as string, icon: <Fuel className="h-4 w-4" /> })
+    specs.push({ label: 'Fuel type', value: listing.fuelType as string, icon: <Fuel className="h-4 w-4" /> })
   if (listing.mileage !== undefined && listing.mileage !== null)
     specs.push({ label: 'Mileage', value: `${new Intl.NumberFormat('en-NG').format(listing.mileage as number)} km`, icon: <Gauge className="h-4 w-4" /> })
   if (listing.color)
@@ -41,13 +41,13 @@ function buildCarSpecs(listing: Listing): SpecItem[] {
 function buildRealEstateSpecs(listing: Listing): SpecItem[] {
   const specs: SpecItem[] = []
   if (listing.propertyType)
-    specs.push({ label: 'Property Type', value: listing.propertyType as string, icon: <Home className="h-4 w-4" /> })
+    specs.push({ label: 'Property type', value: listing.propertyType as string, icon: <Home className="h-4 w-4" /> })
   if (listing.bedrooms !== undefined && listing.bedrooms !== null)
     specs.push({ label: 'Bedrooms', value: String(listing.bedrooms), icon: <Bed className="h-4 w-4" /> })
   if (listing.sizeSqm !== undefined && listing.sizeSqm !== null)
-    specs.push({ label: 'Floor Area', value: `${new Intl.NumberFormat('en-NG').format(listing.sizeSqm as number)} sqm`, icon: <Maximize2 className="h-4 w-4" /> })
+    specs.push({ label: 'Floor area', value: `${new Intl.NumberFormat('en-NG').format(listing.sizeSqm as number)} sqm`, icon: <Maximize2 className="h-4 w-4" /> })
   if (listing.listingPurpose)
-    specs.push({ label: 'Purpose', value: listing.listingPurpose === 'sale' ? 'For Sale' : listing.listingPurpose === 'rent' ? 'For Rent' : 'For Lease', icon: <MapPin className="h-4 w-4" /> })
+    specs.push({ label: 'Purpose', value: listing.listingPurpose === 'sale' ? 'For sale' : listing.listingPurpose === 'rent' ? 'For rent' : 'For lease', icon: <MapPin className="h-4 w-4" /> })
   return specs
 }
 
@@ -58,7 +58,7 @@ function buildLandSpecs(listing: Listing): SpecItem[] {
   if (listing.landSizeSqm !== undefined && listing.landSizeSqm !== null)
     specs.push({ label: 'Area', value: `${new Intl.NumberFormat('en-NG').format(listing.landSizeSqm as number)} sqm`, icon: <Maximize2 className="h-4 w-4" /> })
   if (listing.landPurpose)
-    specs.push({ label: 'Purpose', value: listing.landPurpose === 'sale' ? 'For Sale' : 'For Lease', icon: <MapPin className="h-4 w-4" /> })
+    specs.push({ label: 'Purpose', value: listing.landPurpose === 'sale' ? 'For sale' : 'For lease', icon: <MapPin className="h-4 w-4" /> })
   return specs
 }
 
@@ -84,30 +84,45 @@ export function KeySpecsGrid({ listing, className }: KeySpecsGridProps) {
   if (specs.length === 0) return null
 
   return (
-    <div className={cn('rounded-[7px] border border-border bg-white', className)}>
-      <div className="border-b border-border bg-muted/40 px-4 py-3 sm:px-6">
-        <h3 className="font-heading text-sm font-semibold uppercase tracking-wider text-foreground">
-          Specifications &amp; Details
+    <div className={cn('rounded-xs border border-border bg-card', className)}>
+      <div className="border-b border-border bg-muted/30 px-5 py-3.5 sm:px-6">
+        <h3 className="font-heading text-base font-semibold text-foreground">
+          Specifications & details
         </h3>
       </div>
-      <dl className="grid grid-cols-1 sm:grid-cols-2">
-        {specs.map((spec, idx) => (
-          <div
-            key={idx}
-            className={cn(
-              'flex items-center justify-between px-4 py-3 sm:px-6 text-sm border-border',
-              idx > 0 && 'border-t'
-            )}
-          >
-            <dt className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              <span className="text-primary/60">{spec.icon}</span>
-              {spec.label}
-            </dt>
-            <dd className="font-heading font-semibold text-foreground text-right">
-              {spec.value}
-            </dd>
-          </div>
-        ))}
+      <dl className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x border-border">
+        <div className="divide-y divide-border">
+          {specs.filter((_, idx) => idx % 2 === 0).map((spec, idx) => (
+            <div
+              key={idx}
+              className="flex items-center justify-between px-5 py-3.5 sm:px-6 text-sm"
+            >
+              <dt className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                <span className="text-primary">{spec.icon}</span>
+                <span>{spec.label}</span>
+              </dt>
+              <dd className="font-heading font-medium text-foreground text-right">
+                {spec.value}
+              </dd>
+            </div>
+          ))}
+        </div>
+        <div className="divide-y divide-border">
+          {specs.filter((_, idx) => idx % 2 === 1).map((spec, idx) => (
+            <div
+              key={idx}
+              className="flex items-center justify-between px-5 py-3.5 sm:px-6 text-sm"
+            >
+              <dt className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                <span className="text-primary">{spec.icon}</span>
+                <span>{spec.label}</span>
+              </dt>
+              <dd className="font-heading font-medium text-foreground text-right">
+                {spec.value}
+              </dd>
+            </div>
+          ))}
+        </div>
       </dl>
     </div>
   )

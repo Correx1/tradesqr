@@ -1,11 +1,11 @@
 import React from 'react'
 import {
   Hero,
+  CategoryTiles,
+  ListingsShowcase,
   ServicesStrip,
-  FeaturedListings,
-  RealEstateShowcase,
-  FAQ,
   WhyChooseUs,
+  FAQ,
 } from '@/components/sections'
 import { FadeInSection } from '@/components/motion'
 import { client } from '@/lib/sanity/client'
@@ -20,8 +20,7 @@ import { type Listing } from '@/types/listing'
 export const revalidate = 60
 
 export default async function HomePage() {
-  let featuredListings: Listing[] = []
-  let realEstateListings: Listing[] = []
+  let showcaseListings: Listing[] = []
 
   try {
     const [cars, recentRE, showcaseRE] = await Promise.all([
@@ -30,23 +29,14 @@ export default async function HomePage() {
       client.fetch(realEstateShowcaseQuery),
     ])
 
-    // Combine: 4 cars + 2 real estate for the carousel
     const combined = [
       ...(cars?.length ? cars : []),
       ...(recentRE?.length ? recentRE : []),
+      ...(showcaseRE?.length ? showcaseRE : []),
     ]
-    featuredListings = combined.length > 0
-      ? combined
-      : DUMMY_LISTINGS.slice(0, 6)
-
-    realEstateListings = showcaseRE?.length
-      ? showcaseRE
-      : DUMMY_LISTINGS.filter((l) => l.category === 'realEstate' || l.category === 'land' || l.category === 'houses')
+    showcaseListings = combined.length > 0 ? combined : DUMMY_LISTINGS
   } catch {
-    featuredListings = DUMMY_LISTINGS.slice(0, 6)
-    realEstateListings = DUMMY_LISTINGS.filter(
-      (l) => l.category === 'realEstate' || l.category === 'land' || l.category === 'houses'
-    )
+    showcaseListings = DUMMY_LISTINGS
   }
 
   return (
@@ -54,23 +44,22 @@ export default async function HomePage() {
       {/* 1. Hero Section */}
       <Hero />
 
-      {/* 2. Recent Listings Carousel (4 Cars + 2 Real Estate) */}
+      {/* 2. Primary Visual Entry Category Tiles */}
+      <CategoryTiles />
+
+      {/* 3. Unified Listings Showcase with Category Tabs */}
       <FadeInSection direction="up" duration={0.5} delay={0.05}>
-        <FeaturedListings listings={featuredListings} />
+        <ListingsShowcase listings={showcaseListings} />
       </FadeInSection>
 
-      {/* 3. Core Services Strip */}
+      {/* 4. Core Solutions & Services Strip */}
       <FadeInSection direction="up" duration={0.5} delay={0.05}>
         <ServicesStrip />
       </FadeInSection>
 
-      {/* 4. Real Estate Spotlight Showcase */}
+      {/* 5. Why Choose Us Direct Marketplace */}
       <FadeInSection direction="up" duration={0.5} delay={0.05}>
-        <RealEstateShowcase listings={realEstateListings} />
-      </FadeInSection>
-
-      <FadeInSection direction="up" duration={0.5} delay={0.05}>
-      <WhyChooseUs/>
+        <WhyChooseUs />
       </FadeInSection>
 
       {/* 6. Frequently Asked Questions */}
@@ -80,3 +69,4 @@ export default async function HomePage() {
     </main>
   )
 }
+

@@ -16,7 +16,7 @@ export default function ContactPage() {
       <ContactSection />
 
       {/* 3. Common Questions Section */}
-      <div className="border-t border-slate-100">
+      <div className="border-t border-border">
         <FAQ />
       </div>
     </main>

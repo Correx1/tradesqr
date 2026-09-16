@@ -70,7 +70,7 @@ export function GalleryLightbox({
       {/* Main Showcase Image */}
       <div
         onClick={() => openLightbox(0)}
-        className="group relative aspect-16/10 w-full cursor-pointer overflow-hidden rounded-[7px] border border-border bg-muted"
+        className="group relative aspect-16/10 w-full cursor-pointer overflow-hidden rounded-xs border border-border bg-muted"
       >
         {mainImageUrl && (
           <Image
@@ -78,14 +78,14 @@ export function GalleryLightbox({
             alt={`${title} - Photo 1`}
             fill
             priority
-            className="object-cover transition-transform duration-300 group-hover:scale-103"
+            className="object-cover transition-transform duration-500 group-hover:scale-103"
             sizes="(max-width: 1024px) 100vw, 800px"
           />
         )}
-        <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/20" />
+        <div className="absolute inset-0 bg-background/0 transition-colors group-hover:bg-background/20" />
         <button
           type="button"
-          className="absolute right-3 bottom-3 flex items-center gap-1.5 rounded-[7px] bg-black/75 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur-xs transition-opacity hover:bg-black"
+          className="absolute right-3 bottom-3 flex items-center gap-1.5 rounded-full bg-background/85 px-3 py-1.5 text-xs font-medium text-foreground border border-border backdrop-blur-xs transition-colors hover:bg-background shadow-xs"
         >
           <Maximize2 className="h-3.5 w-3.5" />
           <span>View all ({allImages.length})</span>
@@ -105,7 +105,7 @@ export function GalleryLightbox({
                 key={img?.asset?._ref || idx}
                 type="button"
                 onClick={() => openLightbox(idx)}
-                className="group relative aspect-16/10 w-full overflow-hidden rounded-[7px] border border-border bg-muted focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+                className="group relative aspect-16/10 w-full overflow-hidden rounded-xs border border-border bg-muted focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
               >
                 {thumbUrl && (
                   <Image
@@ -117,7 +117,7 @@ export function GalleryLightbox({
                   />
                 )}
                 {isLastOfPreview && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/70 font-heading text-xs font-bold text-white">
+                  <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-xs font-heading text-xs font-semibold text-foreground">
                     +{remainingCount} more
                   </div>
                 )}
@@ -129,7 +129,10 @@ export function GalleryLightbox({
 
       {/* Lightbox Modal Dialog */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-4xl border-border bg-black/95 p-2 sm:p-4 text-white sm:max-w-5xl rounded-[7px]">
+        <DialogContent
+          overlayClassName="bg-background/95 backdrop-blur-md"
+          className="max-w-4xl border-border bg-card p-3 sm:p-5 text-card-foreground sm:max-w-5xl rounded-xs shadow-2xl"
+        >
           <DialogTitle className="sr-only">{title} Gallery</DialogTitle>
           <DialogDescription className="sr-only">
             Image {activeIndex + 1} of {allImages.length}
@@ -137,7 +140,7 @@ export function GalleryLightbox({
 
           <div className="relative flex flex-col items-center justify-center">
             {/* Active Full Image Container */}
-            <div className="relative aspect-16/10 w-full max-h-[75vh] overflow-hidden rounded-[7px] bg-black">
+            <div className="relative aspect-16/10 w-full max-h-[75vh] overflow-hidden rounded-xs bg-muted/40 border border-border/50">
               {activeImageUrl && (
                 <Image
                   src={activeImageUrl}
@@ -150,7 +153,7 @@ export function GalleryLightbox({
               )}
             </div>
 
-            {/* Navigation Overlay Controls */}
+            {/* Navigation Controls */}
             {allImages.length > 1 && (
               <>
                 <button
@@ -159,10 +162,10 @@ export function GalleryLightbox({
                     e.stopPropagation()
                     prevImage()
                   }}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-[7px] bg-black/60 text-white transition-colors hover:bg-primary focus:outline-hidden"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-background/80 text-foreground border border-border backdrop-blur-xs transition-colors hover:bg-primary hover:text-primary-foreground focus:outline-hidden shadow-xs"
                   aria-label="Previous photo"
                 >
-                  <ChevronLeft className="h-6 w-6" />
+                  <ChevronLeft className="h-5 w-5" />
                 </button>
                 <button
                   type="button"
@@ -170,18 +173,18 @@ export function GalleryLightbox({
                     e.stopPropagation()
                     nextImage()
                   }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-[7px] bg-black/60 text-white transition-colors hover:bg-primary focus:outline-hidden"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-background/80 text-foreground border border-border backdrop-blur-xs transition-colors hover:bg-primary hover:text-primary-foreground focus:outline-hidden shadow-xs"
                   aria-label="Next photo"
                 >
-                  <ChevronRight className="h-6 w-6" />
+                  <ChevronRight className="h-5 w-5" />
                 </button>
               </>
             )}
 
             {/* Footer Status Bar */}
-            <div className="mt-3 flex w-full items-center justify-between px-2 text-xs text-muted-foreground">
-              <span className="truncate max-w-[70%] text-neutral-300">{title}</span>
-              <span className="font-medium text-white">
+            <div className="mt-3 flex w-full items-center justify-between px-1 text-xs text-muted-foreground">
+              <span className="truncate max-w-[70%] font-medium text-foreground">{title}</span>
+              <span className="font-heading font-medium text-foreground">
                 {activeIndex + 1} / {allImages.length}
               </span>
             </div>

@@ -1,8 +1,7 @@
 import React from 'react'
 import { MessageSquare, Phone, Mail, Share2, ExternalLink } from 'lucide-react'
 import { type ContactLink, type ContactLinkType } from '@/types/listing'
-import { formatContactLink } from '@/lib/utils'
-import { cn } from '@/lib/utils'
+import { formatContactLink, cn } from '@/lib/utils'
 
 export interface ContactLinksProps {
   links: ContactLink[]
@@ -59,10 +58,10 @@ export function ContactLinks({
             target={formatted.isExternal ? '_blank' : undefined}
             rel={formatted.isExternal ? 'noopener noreferrer' : undefined}
             className={cn(
-              'inline-flex items-center justify-center gap-2 rounded-[7px] px-4 py-2.5 text-sm font-semibold transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary',
+              'inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 active:scale-[0.98] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary w-full text-center',
               isPrimary
-                ? 'bg-primary text-white hover:bg-primary/90 shadow-xs'
-                : 'border border-border bg-white text-foreground hover:bg-muted/80'
+                ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-xs'
+                : 'border border-border bg-card text-foreground hover:bg-muted'
             )}
           >
             {Icon}
@@ -73,3 +72,5 @@ export function ContactLinks({
     </div>
   )
 }
+
+export default ContactLinks

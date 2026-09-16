@@ -14,7 +14,6 @@ export interface WhyChooseFeature {
 export interface WhyChooseUsProps {
   eyebrow?: string
   heading?: string
-  highlightedWord?: string
   imageSrc?: string
   features?: WhyChooseFeature[]
   className?: string
@@ -29,7 +28,7 @@ const DEFAULT_FEATURES: WhyChooseFeature[] = [
   {
     icon: <Banknote className="h-5 w-5 text-primary" />,
     title: 'Direct Owner Pricing',
-    description: 'Connect directly with vetted owners and verified sellers with 100% pricing transparency and no phantom middleman markups.',
+    description: 'Connect directly with vetted owners and verified sellers with 100% pricing transparency and zero phantom agent markups.',
   },
   {
     icon: <Lock className="h-5 w-5 text-primary" />,
@@ -44,15 +43,14 @@ const DEFAULT_FEATURES: WhyChooseFeature[] = [
 ]
 
 export function WhyChooseUs({
-  eyebrow = 'Why Choose Us',
-  heading = 'Why Choose',
-  highlightedWord = 'TradeSqr',
+  eyebrow = 'Why choose us',
+  heading = 'Direct marketplace built on authentic verification',
   imageSrc = 'https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80',
   features = DEFAULT_FEATURES,
   className,
 }: WhyChooseUsProps) {
   return (
-    <section className={cn('relative w-full overflow-hidden bg-white text-slate-900', className)}>
+    <section className={cn('relative w-full overflow-hidden bg-background text-foreground border-b border-border/80', className)}>
       <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[600px]">
         {/* Left Column: Full-Height Image */}
         <div className="lg:col-span-5 relative min-h-[350px] lg:min-h-full">
@@ -64,35 +62,19 @@ export function WhyChooseUs({
             className="object-cover"
           />
           {/* Subtle gradient blend to the right */}
-          <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-transparent to-white opacity-80 lg:opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-transparent to-background opacity-80 lg:opacity-100" />
         </div>
 
         {/* Right Column: Light Content Container with 2x2 Feature Grid */}
         <div className="lg:col-span-7 flex flex-col justify-center px-6 sm:px-12 lg:px-16 py-16 sm:py-20 lg:py-24 space-y-10">
           {/* Section Header */}
           <div className="space-y-3">
-            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-primary">
+            <span className="text-xs font-medium text-primary tracking-wide">
               {eyebrow}
             </span>
 
-            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-              {heading}{' '}
-              <span className="relative inline-block text-primary">
-                {highlightedWord}
-                <svg
-                  className="absolute -bottom-1.5 left-0 w-full text-primary"
-                  viewBox="0 0 100 8"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1 5.5C25 2 75 2 99 5.5"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </span>
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground leading-tight">
+              {heading}
             </h2>
           </div>
 
@@ -106,12 +88,12 @@ export function WhyChooseUs({
                 </div>
 
                 {/* Title */}
-                <h3 className="font-heading text-lg font-bold text-slate-900 group-hover:text-primary transition-colors">
+                <h3 className="font-heading text-lg font-medium text-foreground group-hover:text-primary transition-colors">
                   {feature.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -122,3 +104,6 @@ export function WhyChooseUs({
     </section>
   )
 }
+
+export default WhyChooseUs
+

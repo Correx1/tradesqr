@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import React, { useState, useEffect } from 'react'
@@ -13,7 +14,6 @@ import {
   Layers,
   MapPin,
   FileCheck,
-  ArrowRight,
 } from 'lucide-react'
 import { type Listing } from '@/types/listing'
 import { CATEGORIES } from '@/lib/categoryFields'
@@ -33,8 +33,14 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
   const categoryRaw = listing.category || (listing as any).Category || ''
   const category = categoryRaw.toLowerCase()
 
-  const categoryTitle =
+  const rawTitle =
     CATEGORIES.find((c) => c.value.toLowerCase() === category)?.title || categoryRaw
+
+  // Format to clean sentence case ("Cars", "Real Estate", "Land")
+  const categoryTitle =
+    rawTitle.toLowerCase() === 'realestate'
+      ? 'Real Estate'
+      : rawTitle.charAt(0).toUpperCase() + rawTitle.slice(1).toLowerCase()
 
   const formattedPrice = formatPrice({
     price: listing.price,
@@ -69,27 +75,27 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
     return () => clearInterval(timer)
   }, [images.length])
 
-  // Micro Spec Pills Generator
+  // Micro Spec Pills Generator with brass primary icons
   const renderSpecPills = () => {
     switch (category) {
       case 'cars': {
         return (
           <div className="flex flex-wrap items-center gap-1.5 pt-1">
             {listing.year !== undefined && (
-              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
-                <Calendar className="h-3 w-3 text-blue-400" />
+              <span className="inline-flex items-center gap-1 rounded-xs bg-[#121214]/70 px-2.5 py-0.5 text-[11px] font-medium text-[#FAFAF8] backdrop-blur-xs border border-white/10">
+                <Calendar className="h-3 w-3 text-primary" />
                 <span>{String(listing.year)}</span>
               </span>
             )}
             {listing.condition && (
-              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
-                <ShieldCheck className="h-3 w-3 text-blue-400" />
+              <span className="inline-flex items-center gap-1 rounded-xs bg-[#121214]/70 px-2.5 py-0.5 text-[11px] font-medium text-[#FAFAF8] backdrop-blur-xs border border-white/10">
+                <ShieldCheck className="h-3 w-3 text-primary" />
                 <span className="truncate max-w-[90px]">{String(listing.condition)}</span>
               </span>
             )}
             {listing.transmission && (
-              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
-                <Sliders className="h-3 w-3 text-blue-400" />
+              <span className="inline-flex items-center gap-1 rounded-xs bg-[#121214]/70 px-2.5 py-0.5 text-[11px] font-medium text-[#FAFAF8] backdrop-blur-xs border border-white/10">
+                <Sliders className="h-3 w-3 text-primary" />
                 <span>{String(listing.transmission)}</span>
               </span>
             )}
@@ -98,25 +104,24 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
       }
 
       case 'realestate':
-      case 'realestate':
       case 'houses': {
         return (
           <div className="flex flex-wrap items-center gap-1.5 pt-1">
             {listing.bedrooms !== undefined && (
-              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
-                <Bed className="h-3 w-3 text-blue-400" />
+              <span className="inline-flex items-center gap-1 rounded-xs bg-[#121214]/70 px-2.5 py-0.5 text-[11px] font-medium text-[#FAFAF8] backdrop-blur-xs border border-white/10">
+                <Bed className="h-3 w-3 text-primary" />
                 <span>{String(listing.bedrooms)} Beds</span>
               </span>
             )}
             {listing.sizeSqm !== undefined && (
-              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
-                <Maximize2 className="h-3 w-3 text-blue-400" />
+              <span className="inline-flex items-center gap-1 rounded-xs bg-[#121214]/70 px-2.5 py-0.5 text-[11px] font-medium text-[#FAFAF8] backdrop-blur-xs border border-white/10">
+                <Maximize2 className="h-3 w-3 text-primary" />
                 <span>{new Intl.NumberFormat('en-NG').format(listing.sizeSqm as number)} sqm</span>
               </span>
             )}
             {listing.titleDocument && (
-              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
-                <FileCheck className="h-3 w-3 text-blue-400" />
+              <span className="inline-flex items-center gap-1 rounded-xs bg-[#121214]/70 px-2.5 py-0.5 text-[11px] font-medium text-[#FAFAF8] backdrop-blur-xs border border-white/10">
+                <FileCheck className="h-3 w-3 text-primary" />
                 <span className="truncate max-w-[100px]">{String(listing.titleDocument)}</span>
               </span>
             )}
@@ -130,20 +135,20 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
         return (
           <div className="flex flex-wrap items-center gap-1.5 pt-1">
             {landArea !== undefined && (
-              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
-                <Maximize2 className="h-3 w-3 text-blue-400" />
+              <span className="inline-flex items-center gap-1 rounded-xs bg-[#121214]/70 px-2.5 py-0.5 text-[11px] font-medium text-[#FAFAF8] backdrop-blur-xs border border-white/10">
+                <Maximize2 className="h-3 w-3 text-primary" />
                 <span>{new Intl.NumberFormat('en-NG').format(landArea as number)} sqm</span>
               </span>
             )}
             {listing.plots !== undefined && (
-              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
-                <Layers className="h-3 w-3 text-blue-400" />
+              <span className="inline-flex items-center gap-1 rounded-xs bg-[#121214]/70 px-2.5 py-0.5 text-[11px] font-medium text-[#FAFAF8] backdrop-blur-xs border border-white/10">
+                <Layers className="h-3 w-3 text-primary" />
                 <span>{String(listing.plots)} {Number(listing.plots) === 1 ? 'Plot' : 'Plots'}</span>
               </span>
             )}
             {titleDoc && (
-              <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-200 backdrop-blur-xs border border-white/10">
-                <FileCheck className="h-3 w-3 text-blue-400" />
+              <span className="inline-flex items-center gap-1 rounded-xs bg-[#121214]/70 px-2.5 py-0.5 text-[11px] font-medium text-[#FAFAF8] backdrop-blur-xs border border-white/10">
+                <FileCheck className="h-3 w-3 text-primary" />
                 <span className="truncate max-w-[100px]">{String(titleDoc)}</span>
               </span>
             )}
@@ -158,16 +163,16 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
 
   return (
     <motion.div
-      whileHover={{ y: -6 }}
+      whileHover={{ y: -4 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
       className={cn(
-        'group relative flex flex-col overflow-hidden rounded-[32px] sm:rounded-[36px] border border-slate-200 bg-slate-900 shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-primary/50',
+        'group relative flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-xs transition-all duration-300 hover:shadow-xl hover:border-primary/50',
         className
       )}
     >
       <Link
         href={`/listings/${listing.slug.current}`}
-        className="relative flex aspect-3/4 sm:aspect-4/5 w-full flex-col justify-between overflow-hidden rounded-[32px] sm:rounded-[36px] focus:outline-hidden"
+        className="relative flex aspect-3/4 sm:aspect-4/5 w-full flex-col justify-between overflow-hidden rounded-lg focus:outline-hidden"
       >
         {/* Auto-Cycling Image Slideshow */}
         <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
@@ -192,21 +197,21 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
           </AnimatePresence>
         </div>
 
-        {/* Bottom-Only Soft Gradient Scrim for Text Readability */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none" />
+        {/* Bottom-Only Soft Ink Gradient Scrim for Text Readability */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#121214]/95 via-[#121214]/40 to-transparent pointer-events-none" />
 
         {/* Top Badges Strip + Image Progress Dots */}
         <div className="relative z-20 flex flex-col gap-2 p-4 sm:p-5">
           <div className="flex items-center justify-between">
             {/* Bold Price Pill Badge */}
-            <div className="inline-flex items-center rounded-full bg-white px-3.5 py-1 shadow-lg">
-              <span className="font-heading text-xs sm:text-sm font-extrabold tracking-tight text-slate-900">
+            <div className="inline-flex items-center rounded-full bg-background px-3.5 py-1 shadow-md border border-border/30">
+              <span className="font-heading text-xs sm:text-sm font-semibold tracking-tight text-foreground">
                 {formattedPrice}
               </span>
             </div>
 
-            {/* Category Chip */}
-            <span className="inline-flex items-center rounded-full bg-black/60 px-3 py-1 text-[10.5px] font-semibold uppercase tracking-wider text-slate-200 backdrop-blur-md border border-white/15">
+            {/* Category Chip in Sentence Case */}
+            <span className="inline-flex items-center rounded-full bg-[#121214]/75 px-3 py-1 text-[11px] font-medium text-[#FAFAF8] backdrop-blur-md border border-white/15">
               {categoryTitle}
             </span>
           </div>
@@ -229,16 +234,16 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
           )}
         </div>
 
-        {/* Bottom Frosted Glass Overlay Dock */}
+        {/* Bottom Overlay Dock */}
         <div className="relative z-20 flex flex-col justify-end p-5 sm:p-6 pt-0 space-y-2.5">
           {/* Title & Location */}
           <div>
-            <h3 className="font-heading text-base sm:text-lg font-bold text-white tracking-tight line-clamp-1 transition-colors group-hover:text-blue-300">
+            <h3 className="font-heading text-base sm:text-lg font-medium text-[#FAFAF8] tracking-tight line-clamp-1 transition-colors group-hover:text-primary">
               {listing.title}
             </h3>
             {listing.location?.city && (
-              <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-300">
-                <MapPin className="h-3.5 w-3.5 shrink-0 text-blue-400" />
+              <div className="mt-1 flex items-center gap-1.5 text-xs text-[#E4E1D9]/80">
+                <MapPin className="h-3.5 w-3.5 shrink-0 text-primary" />
                 <span className="truncate">
                   {listing.location.city}
                   {listing.location.state ? `, ${listing.location.state}` : ''}
@@ -250,13 +255,15 @@ export function ListingCard({ listing, priority = false, className }: ListingCar
           {/* Micro Spec Pills */}
           {renderSpecPills()}
 
-          {/* Bottom Action Indicator with Slide-In Arrow */}
-          <div className="pt-2.5 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">
-            <span className="tracking-wide">View Details</span>
-            <ArrowRight className="h-3.5 w-3.5 text-blue-400 transition-transform duration-200 group-hover:translate-x-1" />
+          {/* Bottom Action Indicator */}
+          <div className="pt-2.5 border-t border-white/15 flex items-center justify-between text-xs font-medium text-[#E4E1D9]/85 transition-colors group-hover:text-primary">
+            <span className="group-hover:underline underline-offset-4">View details</span>
           </div>
         </div>
       </Link>
     </motion.div>
   )
 }
+
+export default ListingCard
+

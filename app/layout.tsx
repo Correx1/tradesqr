@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, Syne } from "next/font/google";
+import { Fraunces, Work_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const fraunces = Fraunces({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  axes: ["opsz"],
   display: "swap",
 });
 
-const syne = Syne({
-  variable: "--font-syne",
+const workSans = Work_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${syne.variable} antialiased`}
+      className={`${workSans.variable} ${fraunces.variable} antialiased`}
     >
       <body className="min-h-screen flex flex-col bg-background text-foreground selection:bg-primary/10 selection:text-primary">
         {children}
@@ -41,3 +41,4 @@ export default function RootLayout({
     </html>
   );
 }
+

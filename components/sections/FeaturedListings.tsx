@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react'
 import Link from 'next/link'
-import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Autoplay } from 'swiper/modules'
 import { type Swiper as SwiperType } from 'swiper'
@@ -23,7 +23,7 @@ export interface FeaturedListingsProps {
 }
 
 export function FeaturedListings({
-  heading = 'Featured Listings',
+  heading = 'Featured listings',
   subheading = 'Handpicked opportunities across foreign-used vehicles, premium real estate, and verified land plots.',
   listings = [],
   viewAllHref = '/listings',
@@ -34,16 +34,16 @@ export function FeaturedListings({
   return (
     <section
       data-section="featured-listings"
-      className={cn('py-16 sm:py-24 bg-white text-slate-900 border-b border-slate-100 overflow-hidden', className)}
+      className={cn('py-16 sm:py-24 bg-background text-foreground border-b border-border overflow-hidden', className)}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-10 gap-4">
           <div className="max-w-2xl space-y-1.5">
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900">
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground">
               {heading}
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-xl">
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-xl">
               {subheading}
             </p>
           </div>
@@ -52,10 +52,9 @@ export function FeaturedListings({
           <div className="flex items-center gap-4 shrink-0">
             <Link
               href={viewAllHref}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-primary hover:underline transition-colors"
+              className="text-xs font-semibold text-muted-foreground hover:text-primary underline underline-offset-4 transition-colors"
             >
-              <span>View All</span>
-              <ArrowUpRight className="h-4 w-4" />
+              View all listings
             </Link>
 
             {/* Desktop Navigation Arrows */}
@@ -64,17 +63,17 @@ export function FeaturedListings({
                 type="button"
                 onClick={() => swiperRef.current?.slidePrev()}
                 aria-label="Previous listing"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary active:scale-95 focus:outline-hidden cursor-pointer"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-xs transition-colors hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-95 focus:outline-hidden cursor-pointer"
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ChevronLeft className="h-4 w-4" />
               </button>
               <button
                 type="button"
                 onClick={() => swiperRef.current?.slideNext()}
                 aria-label="Next listing"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary active:scale-95 focus:outline-hidden cursor-pointer"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-xs transition-colors hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-95 focus:outline-hidden cursor-pointer"
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-4 w-4" />
               </button>
             </div>
           </div>
@@ -82,7 +81,7 @@ export function FeaturedListings({
 
         {/* Carousel Slider with Auto-sliding Cards */}
         {listings.length === 0 ? (
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-12 text-center text-slate-500 text-sm">
+          <div className="rounded-xs border border-border bg-card p-12 text-center text-muted-foreground text-sm">
             No featured listings available at the moment.
           </div>
         ) : (
@@ -126,17 +125,17 @@ export function FeaturedListings({
                 type="button"
                 onClick={() => swiperRef.current?.slidePrev()}
                 aria-label="Previous listing"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs hover:bg-primary hover:text-white cursor-pointer"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-xs hover:bg-primary hover:text-primary-foreground cursor-pointer"
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ChevronLeft className="h-4 w-4" />
               </button>
               <button
                 type="button"
                 onClick={() => swiperRef.current?.slideNext()}
                 aria-label="Next listing"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs hover:bg-primary hover:text-white cursor-pointer"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-xs hover:bg-primary hover:text-primary-foreground cursor-pointer"
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-4 w-4" />
               </button>
             </div>
           </div>

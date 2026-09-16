@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { groq } from 'next-sanity'
-import { MapPin, Tag, ArrowLeft, ArrowUpRight, ShieldCheck } from 'lucide-react'
+import { MapPin, Tag, ShieldCheck } from 'lucide-react'
 
 import { PageWrapper } from '@/components/layout'
 import {
@@ -30,6 +30,25 @@ interface ListingDetailPageProps {
 
 export const revalidate = 60
 
+function formatStatus(status?: string): string {
+  if (!status) return 'Available'
+  switch (status.toLowerCase()) {
+    case 'available':
+      return 'Available'
+    case 'sold':
+      return 'Sold'
+    case 'under-offer':
+    case 'underoffer':
+      return 'Under offer'
+    case 'pending':
+      return 'Pending'
+    case 'reserved':
+      return 'Reserved'
+    default:
+      return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()
+  }
+}
+
 // 1. Generate Static Params
 export async function generateStaticParams() {
   try {
@@ -42,7 +61,7 @@ export async function generateStaticParams() {
   }
 }
 
-// 2. Generate Dynamic Metadata (OG tags for WhatsApp / Facebook / Socials)
+// 2. Generate Dynamic Metadata
 export async function generateMetadata({
   params,
 }: ListingDetailPageProps): Promise<Metadata> {
@@ -110,10 +129,19 @@ const relatedListingsQuery = groq`
     slug,
     category,
     coverImage,
+    gallery,
     price,
     priceOnRequest,
     location,
-    status
+    status,
+    condition,
+    year,
+    make,
+    model,
+    bedrooms,
+    propertyType,
+    plots,
+    landSizeSqm
   }
 `
 
@@ -163,26 +191,65 @@ export default async function ListingDetailPage({
     .filter(Boolean)
     .join(', ')
 
+  const statusLabel = formatStatus(listing.status)
+
   return (
     <PageWrapper containerClassName="pt-4 pb-20 sm:pb-24">
-      {/* Breadcrumbs / Back navigation */}
-      <div className="mb-6 flex items-center justify-between">
-        <Link
-          href="/listings"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-primary"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          <span>Back to all listings</span>
+      {/* Breadcrumb Navigation */}
+      <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-muted-foreground overflow-x-auto whitespace-nowrap py-1">
+        <Link href="/" className="hover:text-foreground transition-colors">
+          Home
         </Link>
-        <span className="inline-flex items-center rounded-[7px] bg-primary/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+        <span className="text-muted-foreground/60">/</span>
+        <Link
+          href={`/listings?category=${listing.category}`}
+          className="hover:text-foreground transition-colors"
+        >
           {categoryTitle}
+        </Link>
+        <span className="text-muted-foreground/60">/</span>
+        <span className="text-foreground font-medium truncate max-w-[220px] sm:max-w-[400px]">
+          {listing.title}
         </span>
-      </div>
+      </nav>
 
-      {/* Main Grid: Gallery & Details (Left) + Sticky Action Sidebar (Right) */}
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
-        {/* Left Column (8 cols): Media & Information */}
-        <div className="space-y-8 lg:col-span-8">
+      {/* Main Two-Column Layout: Left (60-65%) + Right Sticky Contact (35-40%) */}
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 items-start">
+        {/* Left Column (lg:col-span-7 xl:col-span-8): Media, Details & Specs */}
+        <div className="space-y-8 lg:col-span-7 xl:col-span-8 min-w-0">
+          {/* Title & Metadata Header */}
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground border border-border">
+                <Tag className="h-3 w-3 text-primary" />
+                <span>{categoryTitle}</span>
+              </span>
+              {statusLabel && (
+                <span
+                  className={cn(
+                    'inline-flex items-center rounded-full px-3 py-1 text-xs font-medium border',
+                    listing.status === 'sold'
+                      ? 'bg-rose-500/10 text-rose-700 dark:text-rose-400 border-rose-500/20'
+                      : 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20'
+                  )}
+                >
+                  {statusLabel}
+                </span>
+              )}
+            </div>
+
+            <h1 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
+              {listing.title}
+            </h1>
+
+            {locationString && (
+              <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                <MapPin className="h-4 w-4 text-primary shrink-0" />
+                <span>{locationString}</span>
+              </div>
+            )}
+          </div>
+
           {/* Lightbox & Gallery */}
           <GalleryLightbox
             title={listing.title}
@@ -190,50 +257,51 @@ export default async function ListingDetailPage({
             gallery={listing.gallery}
           />
 
-          {/* Core Title & Specs Header */}
-          <div className="space-y-4 rounded-[7px] border border-border bg-white p-6">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="inline-flex items-center gap-1 rounded-[7px] bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                <Tag className="h-3 w-3" />
-                {categoryTitle}
-              </span>
-              {listing.status && (
-                <span
-                  className={cn(
-                    'inline-flex items-center rounded-[7px] px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider',
-                    listing.status === 'available'
-                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                      : listing.status === 'sold'
-                      ? 'bg-rose-50 text-rose-700 border border-rose-200'
-                      : 'bg-amber-50 text-amber-700 border border-amber-200'
-                  )}
-                >
-                  {listing.status}
-                </span>
-              )}
-            </div>
-
-            <h1 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-              {listing.title}
-            </h1>
-
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-border/80">
-              {locationString && (
-                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                  <MapPin className="h-4 w-4 text-primary shrink-0" />
-                  <span>{locationString}</span>
+          {/* Mobile Only: Contact panel stacked right below gallery */}
+          <div className="block lg:hidden">
+            <div className="rounded-xs border border-border bg-card p-6 shadow-xs space-y-5">
+              <div className="flex items-baseline justify-between gap-2">
+                <div>
+                  <span className="text-xs text-muted-foreground font-medium">Direct price</span>
+                  <div className="font-heading text-3xl font-bold text-foreground">
+                    {formattedPrice}
+                  </div>
                 </div>
-              )}
-              <div className="text-right">
-                <span className="block text-xs uppercase tracking-wider text-muted-foreground font-medium">
-                  Price
-                </span>
-                <span className="font-heading text-2xl font-bold text-primary">
-                  {formattedPrice}
+                {statusLabel && (
+                  <span className="text-xs font-medium text-muted-foreground">
+                    Status: <span className="text-foreground">{statusLabel}</span>
+                  </span>
+                )}
+              </div>
+
+              <div className="border-t border-border pt-4 space-y-3">
+                <ContactLinks
+                  links={listing.contactLinks || []}
+                  listingTitle={listing.title}
+                  layout="vertical"
+                />
+              </div>
+
+              <div className="flex items-start gap-2.5 rounded-xs bg-muted/40 p-3 text-xs text-muted-foreground border border-border">
+                <ShieldCheck className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                <span>
+                  Verified listing on TradeSqr. Direct seller negotiation with zero middleman fee.
                 </span>
               </div>
             </div>
           </div>
+
+          {/* Description Section */}
+          {listing.description && (
+            <div className="rounded-xs border border-border bg-card p-6 space-y-3">
+              <h2 className="font-heading text-base font-semibold text-foreground">
+                Overview & description
+              </h2>
+              <div className="text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
+                {listing.description}
+              </div>
+            </div>
+          )}
 
           {/* 1. Core Specifications Grid */}
           <KeySpecsGrid listing={listing} />
@@ -247,42 +315,44 @@ export default async function ListingDetailPage({
           {listing.documents && listing.documents.length > 0 && (
             <DocumentsChecklist documents={listing.documents} />
           )}
-
-          {/* 4. Description Section */}
-          {listing.description && (
-            <div className="rounded-[7px] border border-border bg-white p-6 space-y-3">
-              <h2 className="font-heading text-base font-semibold text-foreground">
-                Overview & Description
-              </h2>
-              <div className="text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
-                {listing.description}
-              </div>
-            </div>
-          )}
         </div>
 
-        {/* Right Column (4 cols): Sticky Contact Card on Desktop */}
-        <div className="lg:col-span-4">
-          <div className="sticky top-20 space-y-6">
-            <div className="rounded-[7px] border border-border bg-white p-6 shadow-xs space-y-5">
+        {/* Right Column (lg:col-span-5 xl:col-span-4): Sticky Contact Card on Desktop */}
+        <div className="hidden lg:block lg:col-span-5 xl:col-span-4">
+          <div className="sticky top-24 space-y-6">
+            <div className="rounded-xs border border-border bg-card p-6 shadow-xs space-y-6">
               <div>
-                <span className="text-xs uppercase tracking-wider text-muted-foreground font-medium">
-                  Listing Valuation
-                </span>
-                <div className="font-heading text-2xl font-bold text-primary mt-0.5">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs text-muted-foreground font-medium">
+                    Direct price
+                  </span>
+                  {statusLabel && (
+                    <span
+                      className={cn(
+                        'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium border',
+                        listing.status === 'sold'
+                          ? 'bg-rose-500/10 text-rose-700 dark:text-rose-400 border-rose-500/20'
+                          : 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20'
+                      )}
+                    >
+                      {statusLabel}
+                    </span>
+                  )}
+                </div>
+                <div className="font-heading text-3xl xl:text-4xl font-bold text-foreground tracking-tight">
                   {formattedPrice}
                 </div>
               </div>
 
-              <div className="border-t border-border/80 pt-4">
-                <h3 className="font-heading text-sm font-semibold text-foreground mb-3">
-                  Direct Inquiries & Contact
+              <div className="border-t border-border pt-5 space-y-3">
+                <h3 className="font-heading text-sm font-semibold text-foreground">
+                  Direct seller contact
                 </h3>
-                <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
-                  Connect immediately with the seller or representative via direct channels. No intermediary fees.
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Connect immediately via your preferred channel. Trade directly with no agent markup.
                 </p>
 
-                {/* Contact Action Buttons */}
+                {/* Stacked Full-Width Pill Buttons */}
                 <ContactLinks
                   links={listing.contactLinks || []}
                   listingTitle={listing.title}
@@ -290,10 +360,10 @@ export default async function ListingDetailPage({
                 />
               </div>
 
-              <div className="flex items-start gap-2.5 rounded-[7px] bg-muted/50 p-3 text-xs text-muted-foreground border border-border/60">
+              <div className="flex items-start gap-2.5 rounded-xs bg-muted/40 p-3.5 text-xs text-muted-foreground border border-border">
                 <ShieldCheck className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                 <span>
-                  TradeSqr verifies listing specifications. We advise conducting physical inspection prior to fund transfer.
+                  Verified listing on TradeSqr. We recommend physical inspection before completing any transfer.
                 </span>
               </div>
             </div>
@@ -301,46 +371,23 @@ export default async function ListingDetailPage({
         </div>
       </div>
 
-      {/* Sticky Mobile Contact Bar (Fixed at bottom on small screens) */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 p-3 backdrop-blur-md lg:hidden shadow-lg">
-        <div className="flex items-center justify-between gap-3 max-w-md mx-auto">
-          <div className="min-w-0 flex-1">
-            <span className="block text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
-              Price
-            </span>
-            <span className="font-heading text-sm font-bold text-primary truncate block">
-              {formattedPrice}
-            </span>
-          </div>
-          <div className="flex-1">
-            <ContactLinks
-              links={(listing.contactLinks || []).slice(0, 1)}
-              listingTitle={listing.title}
-              layout="horizontal"
-              className="w-full justify-end *:w-full *:py-2 text-xs"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Related Listings Section */}
+      {/* Similar Listings Section */}
       {relatedListings.length > 0 && (
-        <div className="mt-16 pt-12 border-t border-border space-y-6">
-          <div className="flex items-center justify-between">
+        <section className="mt-16 sm:mt-20 pt-12 sm:pt-16 border-t border-border space-y-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <h2 className="font-heading text-xl font-bold tracking-tight text-foreground sm:text-2xl">
-                Similar {categoryTitle} Listings
-              </h2>
-              <p className="text-xs text-muted-foreground mt-1">
-                Other available options in this category.
+              <p className="text-xs font-semibold text-primary">
+                Explore more
               </p>
+              <h2 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl mt-1">
+                Similar {categoryTitle.toLowerCase()} listings
+              </h2>
             </div>
             <Link
-              href="/listings"
-              className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-primary hover:underline"
+              href={`/listings?category=${listing.category}`}
+              className="text-xs font-semibold text-muted-foreground hover:text-primary underline underline-offset-4 transition-colors"
             >
-              <span>View All</span>
-              <ArrowUpRight className="h-3.5 w-3.5" />
+              View all {categoryTitle.toLowerCase()}
             </Link>
           </div>
 
@@ -349,7 +396,7 @@ export default async function ListingDetailPage({
               <ListingCard key={relListing._id} listing={relListing} />
             ))}
           </div>
-        </div>
+        </section>
       )}
     </PageWrapper>
   )
